@@ -8,7 +8,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
-import pic from "../Images/pic.jpg";
+import pic from "../../Images/pic.jpg";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Dropdown from "react-bootstrap/Dropdown";
 

@@ -70,6 +70,6 @@ class NewsController extends Controller
     {
         $new = News::findOrFail($id);
         $new->delete();
-        return $new;
+      return response()->json(["News Deleted !!"]);
     }
 }

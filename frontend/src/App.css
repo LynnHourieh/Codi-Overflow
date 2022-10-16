@@ -70,7 +70,16 @@ h1 {
   -o-transition: all 0.4s ease 0s;
   transition: all 0.4s ease 0s;
 }
-
+.add_news{color:#c50000;
+float: right;}
+.news_options{color:#c50000;
+float: right;}
+.news_title{text-align: center;
+  font-weight: lighter;
+  font-size: 22px;
+}
+.news_date{float:right;
+font-size: 12px;}
 /* ----------------News----------- */
 /* ----------------Pagination----------- */
 
