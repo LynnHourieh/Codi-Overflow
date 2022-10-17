@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StatusController extends Controller
 {
@@ -14,7 +15,8 @@ class StatusController extends Controller
      */
     public function index()
     {
-        //
+        $status = DB::table('statuses')->get();
+        return response()->json($status);
     }
 
     /**

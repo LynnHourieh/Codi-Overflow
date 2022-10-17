@@ -14,7 +14,8 @@ class CycleController extends Controller
      */
     public function index()
     {
-        //
+        $cycle = Cycle::with('branch')->get();
+        return response()->json($cycle);
     }
 
     /**

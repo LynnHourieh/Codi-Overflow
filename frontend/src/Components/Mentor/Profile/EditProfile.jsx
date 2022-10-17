@@ -51,12 +51,11 @@ function EditProfile() {
               <Form.Control type="text" placeholder="Cycle" autoFocus />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Disabled select menu</Form.Label>
+              <Form.Label>Status</Form.Label>
               <Form.Select>
                 <option> Select Here</option>
-                <option>Ungrduate</option>
-                <option>Alumni</option>
-                <option>Mentor</option>
+                
+               
               </Form.Select>
             </Form.Group>
 

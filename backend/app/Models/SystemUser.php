@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Cycle;
+use App\Models\Status;
+use App\Models\Question;
+use App\Models\Systemrole;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SystemUser extends Model
 {
@@ -12,7 +16,7 @@ class SystemUser extends Model
     {
         return $this->hasMany(Question::class);
     }
-    public function category()
+    public function cycle()
     {
         return $this->belongsTo(Cycle::class, 'cycle_id');
     }

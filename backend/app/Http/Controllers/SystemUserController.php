@@ -3,28 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\SystemUser;
+use App\Models\Cycle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SystemUserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
+        $systemUser = SystemUser::with('status', 'sysrole', "cycle.branch", "questions")->get();
+        return response()->json($systemUser);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function getfilter()
     {
-        //
+        $student = SystemUser::with('status', 'sysrole', "cycle.branch", "questions")->where('systemroles_id', 1)->get();
+        $mentor = SystemUser::with('status', 'sysrole', "cycle.branch", "questions")->where('systemroles_id', 2)->get();
+        return response()->json([$student,$mentor]);
     }
 
     /**
@@ -44,9 +41,12 @@ class SystemUserController extends Controller
      * @param  \App\Models\SystemUser  $systemUser
      * @return \Illuminate\Http\Response
      */
-    public function show(SystemUser $systemUser)
-    {
-        //
+    public function show($id)
+   {
+
+        $task = SystemUser::findorFail($id);
+        $task->get();
+        return $task; 
     }
 
     /**

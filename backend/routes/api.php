@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CycleController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SystemRoleController;
-use App\Models\News;
+use App\Http\Controllers\SystemUserController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,3 +46,19 @@ Route::get("/sysrole",[SystemRoleController::class,'index']);
 Route::get("/status",[StatusController::class,'index']);
 
 //-----------------Status------------------//
+
+//-----------------Branch------------------//
+Route::get("/branch", [BranchController::class, 'index']);
+
+//-----------------Branch------------------//
+
+//-----------------System_user------------------//
+Route::get("/sysuser", [SystemUserController::class, 'index']);
+Route::get("/sysuser/{id}", [SystemUserController::class, 'show']);
+Route::get("/sysfilter",[SystemUserController::class, 'getfilter']);
+//-----------------System_user------------------//
+
+//-----------------Cycle------------------//
+
+Route::get("/cycle", [CycleController::class, 'index']);
+//-----------------Cycle------------------//

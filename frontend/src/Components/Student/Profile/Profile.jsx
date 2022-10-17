@@ -1,40 +1,73 @@
-import EditProfile from "./EditProfile";
-import "./Profile.css"
-
+import React,{useState,useEffect} from "react";
 const Profile=()=>{
+   const [profile, setProfile] = useState(null);
+   const [loading, setLoading] = useState(true);
+   const [error, setError] = useState(null);
+   const FetchProfile = () => {
+     fetch(`${process.env.REACT_APP_Codi_URL}/api/sysuser`, {
+       method: "GET",
+       headers: {
+         "Content-Type": "application/json",
+       },
+     })
+       .then((reponse) => {
+         if (reponse.ok) {
+           return reponse.json();
+         }
+       })
+       .then((data) => {
+         setLoading(false);
+
+         setProfile(data);
+       })
+       .catch((error) => {
+         console.error(error.message);
+         setError(error);
+       });
+   };   useEffect(() => {
+     FetchProfile();
+   }, []);
+    if (loading) return "loading";
+       let profiledetails = profile.map(function (item) {
+         return [item.picture,item.sysrole.sys_name,item.username,item.name,item.email,item.cycle.cy_name,item.cycle.branch.br_name];
+       });  
+
+       console.log(profile)
+  
+
     return (
-      <div class="container emp-profile">
+      <div className="container emp-profile">
         <div className="eleven">
           <h1>Profile</h1>
         </div>
         <form method="post">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="profile-img">
+          <div className="row">
+            <div className="col-md-4">
+              <div className="profile-img">
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
                   alt=""
                 />
-                {/* <div class="file btn btn-lg btn-primary">
+                {/* <div className="file btn btn-lg btn-primary">
                   Change Photo
                   <input type="file" name="file" />
                 </div> */}
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="profile-head">
-                <h5>Kshiti Ghelani</h5>
-                <h6>Student/Mentor/Alumni</h6>
-                <p class="proile-rating">
+            <div className="col-md-6">
+              <div className="profile-head">
+                <h5>{profiledetails[0][3]}</h5>
+                <h6>{profiledetails[0][1]}</h6>
+                <p className="proile-rating">
                   Questions : <span>8</span>
                 </p>
-                <p class="proile-rating">
+                <p className="proile-rating">
                   Answers : <span>8</span>
                 </p>
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                  <li class="nav-item">
+                <ul className="nav nav-tabs" id="myTab" role="tablist">
+                  <li className="nav-item">
                     <a
-                      class="nav-link active"
+                      className="nav-link active"
                       id="home-tab"
                       data-toggle="tab"
                       href="#home"
@@ -45,63 +78,60 @@ const Profile=()=>{
                       About
                     </a>
                   </li>
-                  <li class="nav-item"></li>
+                  <li className="nav-item"></li>
                 </ul>
               </div>
             </div>
-            <div class="col-md-2">
-              {/* <EditProfile /> */}
-             
-            </div>
+            <div className="col-md-2">{/* <EditProfile /> */}</div>
           </div>
-          <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-8">
-              <div class="tab-content profile-tab" id="myTabContent">
+          <div className="row">
+            <div className="col-md-4"></div>
+            <div className="col-md-8">
+              <div className="tab-content profile-tab" id="myTabContent">
                 <div
-                  class="tab-pane fade show active"
+                  className="tab-pane fade show active"
                   id="home"
                   role="tabpanel"
                   aria-labelledby="home-tab"
                 >
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label>User Id</label>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <label>Username</label>
                     </div>
-                    <div class="col-md-6">
-                      <p>Kshiti123</p>
+                    <div className="col-md-6">
+                      <p>{profiledetails[0][2]}</p>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
+                  <div className="row">
+                    <div className="col-md-6">
                       <label>Name</label>
                     </div>
-                    <div class="col-md-6">
-                      <p>Kshiti Ghelani</p>
+                    <div className="col-md-6">
+                      <p>{profiledetails[0][3]}</p>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
+                  <div className="row">
+                    <div className="col-md-6">
                       <label>Email</label>
                     </div>
-                    <div class="col-md-6">
-                      <p>kshitighelani@gmail.com</p>
+                    <div className="col-md-6">
+                      <p>{profiledetails[0][4]}</p>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
+                  <div className="row">
+                    <div className="col-md-6">
                       <label>Branch</label>
                     </div>
-                    <div class="col-md-6">
-                      <p>Zahle</p>
+                    <div className="col-md-6">
+                      <p>{profiledetails[0][6]}</p>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
+                  <div className="row">
+                    <div className="col-md-6">
                       <label>Cylce</label>
                     </div>
-                    <div class="col-md-6">
-                      <p>Z01</p>
+                    <div className="col-md-6">
+                      <p>{profiledetails[0][5]}</p>
                     </div>
                   </div>
                 </div>

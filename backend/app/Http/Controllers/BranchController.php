@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Branch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BranchController extends Controller
 {
@@ -14,7 +15,8 @@ class BranchController extends Controller
      */
     public function index()
     {
-        //
+        $branch = DB::table('branches')->get();
+        return response()->json($branch);
     }
 
     /**
