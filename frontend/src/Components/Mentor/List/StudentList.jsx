@@ -3,7 +3,7 @@ import FilterList from "./FilterList";
 import React,{useState,useEffect} from "react";
 import { useHistory } from "react-router-dom";
 
-function StudentList({ item, allfilter ,setLoading ,setItem,loading}) {
+function StudentList({ item, allfilter ,setLoading ,setItem}) {
   const history = useHistory();
   const Profile = () => {
     history.push("/controlprofile", { state: { id: item.id } });
@@ -11,10 +11,8 @@ function StudentList({ item, allfilter ,setLoading ,setItem,loading}) {
 
   useEffect(() => {
     allfilter()
-  },[loading]);
+  },[]);
 
-
-console.log(item)
   return (
     <>
       <Table striped bordered hover>
@@ -35,13 +33,22 @@ console.log(item)
             return (
               <tr key={index} onClick={Profile}>
                 <td>{unit.id}</td>
-                <td>{unit.picture}</td>
+                {/* <td>{unit.picture}</td> */}
+                <td >
+                 
+                  <img
+                    src={`${process.env.REACT_APP_Codi_URL}/pictures/${unit.picture}`}
+                    
+                   className="list_images"
+                    
+                  />
+                </td>
                 <td>{unit.name}</td>
                 <td>{unit.username}</td>
                 <td>{unit.email}</td>
-                {/* <td>{unit.status.st_name}</td>
-                <td>{unit.cycle.cy_name}</td> */}
-                {/* <td>{unit.cycle.branch.br_name}</td> */}
+                <td>{unit.status.st_name}</td>
+                <td>{unit.cycle.cy_name}</td>
+                <td>{unit.cycle.branch.br_name}</td>
               </tr>
             );
           })}

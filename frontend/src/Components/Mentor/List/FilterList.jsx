@@ -1,71 +1,73 @@
-
 import Nav from "react-bootstrap/Nav";
-import StudentList from './StudentList';
+import StudentList from "./StudentList";
 import React, { useState, useEffect } from "react";
+import Search from "../../Search/Search";
 function FilterList() {
-      const [profile, setProfile] = useState(null);
-      const [loading, setLoading] = useState(true);
-      const [error, setError] = useState(null);
-      const[item,setItem]=useState(null)
-      const FetchProfile = () => {
-      fetch(`${process.env.REACT_APP_Codi_URL}/api/sysfilter`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((reponse) => {
-          if (reponse.ok) {
-              
-            return reponse.json();
-          }
-        })
-        .then((data) => {
-          setLoading(false);
-          setProfile(data);
-          setItem(data)
-        })
-        .catch((error) => {
-          console.error(error.message);
-          setError(error);
-        });
-    };
-   
- 
-
-    const studentfilter=()=>{
-        let item=profile[0]
-        setItem(item)
-        // console.log(item)
-    }
-        const mentorfilter = () => {
-          
-          let item = profile[1];
-          setItem(item);
-        //   console.log(item)
-        };
-        const allfilter=()=>{
-            let item=profile[0].concat(profile[1])
-               setItem(item);
-            
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [item, setItem] = useState(null);
+  const FetchProfile = () => {
+    fetch(`${process.env.REACT_APP_Codi_URL}/api/sysfilter`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((reponse) => {
+        if (reponse.ok) {
+          return reponse.json();
         }
-           useEffect(() => {
-             FetchProfile();
-             setItem(profile);
-           }, []); 
-        
+      })
+      .then((data) => {
+        setLoading(false);
+        //   console.log(data[0].concat(data[1]));
+        setProfile(data[0].concat(data[1]));
+        setItem(data[0].concat(data[1]));
+      })
+      .catch((error) => {
+        console.error(error.message);
+        setError(error);
+      });
+  };
 
-     if (loading) return "loading";
- 
- 
+  const filterItem = (curcat) => {
+    const unit = profile.filter((newVal) => {
+      // console.log(newVal)
+      return newVal.systemroles_id === curcat;
+    });
+    //    console.log(unit)
+    setItem(unit);
+  };
+
+  const allfilter = () => {
+    setItem(profile);
+  };
+  useEffect(() => {
+    FetchProfile();
+    setItem(profile);
+  }, []);
+
+  if (loading) return "loading";
+
   return (
     <>
-      <Nav className="justify-content-center">
-        <Nav.Link onClick={studentfilter}>Students</Nav.Link>
+   {/* <Search/> */}
+      <Nav className="justify-content-center">  
+     
+      <Nav.Link onClick={allfilter} className="filter_button">
+          All
+        </Nav.Link>
+        <Nav.Link onClick={() => filterItem(2)} className="filter_button">
+            Mentors
+          </Nav.Link>
+        <Nav.Link onClick={() => filterItem(1)} className="filter_button">
+          Students
+        </Nav.Link>
         <Nav.Item>
-          <Nav.Link onClick={mentorfilter}>Mentors</Nav.Link>
+          
         </Nav.Item>
-        <Nav.Link onClick={allfilter}>All</Nav.Link>
+      
       </Nav>
       <StudentList
         profile={profile}
@@ -80,4 +82,4 @@ function FilterList() {
   );
 }
 
-export default FilterList
+export default FilterList;
