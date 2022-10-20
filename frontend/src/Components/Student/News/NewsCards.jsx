@@ -27,7 +27,7 @@ function NewsCards() {
           setError(error);
         });
     };
-    console.log(news)
+    // console.log(news)
     useEffect(()=>{
 FetchNews();
     },[]);

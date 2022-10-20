@@ -52,7 +52,7 @@ function FilterList() {
 
   return (
     <>
-   <Search/>
+   {/* <Search/> */}
       <Nav className="justify-content-center">  
      
       <Nav.Link onClick={allfilter} className="filter_button">

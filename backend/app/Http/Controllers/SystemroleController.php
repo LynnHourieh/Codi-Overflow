@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Systemrole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SystemroleController extends Controller
 {
@@ -14,7 +15,8 @@ class SystemroleController extends Controller
      */
     public function index()
     {
-        //
+        $sysrole = DB::table('systemroles')->get();
+        return response()->json($sysrole);
     }
 
     /**

@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+    
 });
 
 //-----------------News------------------//
@@ -54,6 +55,7 @@ Route::get("/branch", [BranchController::class, 'index']);
 
 //-----------------System_user------------------//
 Route::get("/sysuser", [SystemUserController::class, 'index']);
+Route::POST("/addsysuser", [SystemUserController::class, 'store']);
 Route::PUT("/updatesysuser/{id}", [SystemUserController::class, 'update']);
 Route::get("/sysuser/{id}", [SystemUserController::class, 'getuserbyid']);
 Route::get("/sysfilter",[SystemUserController::class, 'getfilter']);

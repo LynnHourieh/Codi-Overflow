@@ -44,7 +44,24 @@ class SystemUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $sys_user = new SystemUser();
+        if ($request->hasFile('picture')) {
+            $getImage = $request->picture;
+            $imageName = $getImage->getClientOriginalName();
+            $imagePath = public_path() . '/pictures';
+            $getImage->move($imagePath, $imageName);
+            $sys_user->picture = $imageName;
+        }
+
+        $sys_user->name = $request->name;
+        $sys_user->username = $request->username;
+        $sys_user->email = $request->email;
+        $sys_user->systemroles_id = $request->systemroles_id;
+        $sys_user->status_id = $request->status_id;
+        $sys_user->cycle_id = $request->cycle_id;
+        $sys_user->save();
+        return $sys_user;
     }
 
     /**

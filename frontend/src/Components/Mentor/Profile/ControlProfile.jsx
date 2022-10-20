@@ -4,7 +4,7 @@ import "./Profile.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-const Profile = () => {
+const Profile = (props) => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -72,7 +72,7 @@ const Profile = () => {
   // console.log(profiledetails);
   return (
     <>
-      <Button className="form "  variant="primary" href="/list">
+      <Button className="form " variant="primary" href="/list">
         Go back to List
       </Button>
       <div className="container emp-profile">
@@ -139,6 +139,12 @@ const Profile = () => {
                 profile={profile}
                 classs={classs}
                 setClasss={setClasss}
+                brnach={props.branch}
+                cycle={props.cycle}
+                sysrole={props.sysrole}
+                status={props.status}
+                setStatus={props.setStatus}
+                sysroles={props.sysroles}
               />
             </div>
           </div>

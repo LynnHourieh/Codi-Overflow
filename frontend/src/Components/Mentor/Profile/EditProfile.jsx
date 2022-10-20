@@ -59,6 +59,12 @@ function EditProfile(props) {
     console.log(id);
     setSelectedstatus(id);
   };
+  const selectcycle=(id)=>{
+    console.log(id);
+    setSelectedcycle(id)
+  }
+
+
   return (
     <>
       <Button
@@ -125,61 +131,44 @@ function EditProfile(props) {
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Role</Form.Label>
-              <Form.Select onClick={(e) => selectfun(e.target.value)}>
-                <option>Select Role</option>
-                <option
-                  value={1}
-                
-                >
-                  Student
-                </option>
-                <option
-                  value={2}
-                 
-                >
-                  {" "}
-                  Mentor
-                </option>
+              <Form.Select 
+              
+              onClick={(e) => selectfun(e.target.value)}>
+                {props.sysroles.map((unit) => (
+                  <option key={unit.id} value={unit.id}>
+                    {unit.sys_name}
+                  </option>
+                ))}
               </Form.Select>
-
-              {/* <Form.Control
-                type="text"
-                placeholder="Branch name"
-                value={SelectedSystemRoles}
-                onChange={(e) => {
-                  setSelectedSystemRoles(e.target.value);
-                }}
-                autoFocus
-              /> */}
             </Form.Group>
 
-            {props.classs == true ? (
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label>Cycle </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Cycle"
-                  value={Selectedcycle}
-                  onChange={(e) => {
-                    setSelectedcycle(e.target.value);
-                  }}
-                  autoFocus
-                />
-              </Form.Group>
-            ) : (
-              ""
-            )}
-            {props.classs == true ? (
+            {props.classs == true && SelectedSystemRoles == 1 ? (
               <Form.Group className="mb-3">
                 <Form.Label>Status</Form.Label>
 
                 <Form.Select onClick={(e) => selectStatus(e.target.value)}>
-                  <option>Select Role</option>
-                  <option value={1}>Ungraduated</option>
-                  <option value={2}> Alumni</option>
+                  {props.status.map((unit) => (
+                    <option key={unit.id} value={unit.id}>
+                      {unit.st_name}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+            ) : (
+              ""
+            )}
+            {props.classs == true &&
+           
+            SelectedSystemRoles == 1 ? (
+              <Form.Group className="mb-3">
+                <Form.Label>Cycle</Form.Label>
+
+                <Form.Select onClick={(e) => selectcycle(e.target.value)}>
+                  {props.cycle.map((unit) => (
+                    <option key={unit.id} value={unit.id}>
+                      {unit.cy_name}
+                    </option>
+                  ))}
                 </Form.Select>
               </Form.Group>
             ) : (
