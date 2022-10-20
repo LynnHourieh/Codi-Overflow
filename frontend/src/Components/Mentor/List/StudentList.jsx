@@ -1,17 +1,20 @@
 import Table from "react-bootstrap/Table";
 import FilterList from "./FilterList";
 import React,{useState,useEffect} from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function StudentList({ item, allfilter ,setLoading ,setItem}) {
-  const history = useHistory();
-  const Profile = () => {
-    history.push("/controlprofile", { state: { id: item.id } });
-  };
-
+  const navigate = useNavigate();
+  const Profile = (id) => {
+  // console.log(id)
+       navigate("/controlprofile", { state: { id: id } });
+        
+  }
+   
   useEffect(() => {
     allfilter()
   },[]);
+ 
 
   return (
     <>
@@ -30,23 +33,22 @@ function StudentList({ item, allfilter ,setLoading ,setItem}) {
         </thead>
         <tbody>
           {item.map((unit, index) => {
+           
             return (
-              <tr key={index} onClick={Profile}>
+              <tr key={index} onClick={() => Profile(unit.id)}>
                 <td>{unit.id}</td>
                 {/* <td>{unit.picture}</td> */}
-                <td >
-                 
+                <td>
                   <img
                     src={`${process.env.REACT_APP_Codi_URL}/pictures/${unit.picture}`}
-                    
-                   className="list_images"
-                    
+                    className="list_images"
                   />
                 </td>
                 <td>{unit.name}</td>
                 <td>{unit.username}</td>
                 <td>{unit.email}</td>
-                <td>{unit.status.st_name}</td>
+                {unit.sysrole.sys_name =="Student" ? (    <td>{unit.status.st_name}</td>):(<td>Mentor has no Status</td>)}
+            
                 <td>{unit.cycle.cy_name}</td>
                 <td>{unit.cycle.branch.br_name}</td>
               </tr>

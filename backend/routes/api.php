@@ -54,8 +54,10 @@ Route::get("/branch", [BranchController::class, 'index']);
 
 //-----------------System_user------------------//
 Route::get("/sysuser", [SystemUserController::class, 'index']);
-Route::get("/sysuser/{id}", [SystemUserController::class, 'show']);
+Route::PUT("/updatesysuser/{id}", [SystemUserController::class, 'update']);
+Route::get("/sysuser/{id}", [SystemUserController::class, 'getuserbyid']);
 Route::get("/sysfilter",[SystemUserController::class, 'getfilter']);
+Route::get("/search/{id}", [SystemUserController::class, 'search']);
 //-----------------System_user------------------//
 
 //-----------------Cycle------------------//

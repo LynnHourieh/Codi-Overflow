@@ -23,6 +23,18 @@ class SystemUserController extends Controller
         $mentor = SystemUser::with('status', 'sysrole', "cycle.branch", "questions")->where('systemroles_id', 2)->get();
         return response()->json([$student,$mentor]);
     }
+    public function search(Request $request)
+    {
+
+        $name = $request['name'];
+        if ($name) {
+            $task = DB::table('system_users')->where('name', 'Like', '%' . $name . '%')->get();
+            return $task;
+        } else {
+            $task = SystemUser::all();
+            return $task;
+        }
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,14 +53,14 @@ class SystemUserController extends Controller
      * @param  \App\Models\SystemUser  $systemUser
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getuserbyid($id)
    {
 
-        $task = SystemUser::findorFail($id);
-        $task->get();
+        $task = SystemUser::where("id",$id)->with('status', 'sysrole', "cycle.branch", "questions")->get();
+     
         return $task; 
     }
-
+ 
     /**
      * Show the form for editing the specified resource.
      *
@@ -67,9 +79,30 @@ class SystemUserController extends Controller
      * @param  \App\Models\SystemUser  $systemUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SystemUser $systemUser)
+    public function update(Request $request, $id)
     {
-        //
+
+        $user = SystemUser::findorFail($id);
+        if ($request->picture) {
+            $imagePath = public_path() . "/pictures/";
+            //remove old file
+            if ($user->picture = null && $user->picture = "") {
+                $file_old = $imagePath . $user->au_logo;
+                unlink($file_old);
+            }
+            //upload new file
+            $file = $request->picture;
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . "." . $ext;
+            $file->move($imagePath, $filename);
+            //for update in table           
+            $user->picture = $filename;
+        }
+
+        $inputuser = $request->except(['_method', 'token', 'picture']);
+        $user->update($inputuser);
+        // return response()->json($request->picture);
+        return $user;
     }
 
     /**

@@ -1,15 +1,20 @@
 import React,{useState,useEffect} from "react";
+
 const Profile=()=>{
    const [profile, setProfile] = useState(null);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
    const FetchProfile = () => {
-     fetch(`${process.env.REACT_APP_Codi_URL}/api/sysuser`, {
-       method: "GET",
-       headers: {
-         "Content-Type": "application/json",
-       },
-     })
+    
+     fetch(
+       `${process.env.REACT_APP_Codi_URL}/api/sysuser/`,
+       {
+         method: "GET",
+         headers: {
+           "Content-Type": "application/json",
+         },
+       }
+     )
        .then((reponse) => {
          if (reponse.ok) {
            return reponse.json();

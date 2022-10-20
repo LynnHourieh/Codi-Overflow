@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("picture")->nullable();
             $table->foreignId('systemroles_id')->constrained('systemroles');
             $table->foreignId('status_id')->constrained('statuses');
-             $table->foreignId('cycle_id')->constrained('cycles');
+            $table->foreignId('cycle_id')->constrained('cycles');
             $table->timestamps();
         });
     }

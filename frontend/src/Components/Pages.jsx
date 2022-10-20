@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import News from "./Student/News/News";
 import StickyNav from "./Layout/StickyNav";
 import QuestionsAndAnswersHeader from "./Student/Question&Answers/QuestionsAndAnswersHeader";
@@ -13,37 +13,37 @@ import ListHeader from "./Mentor/List/ListHeader";
 function Pages() {
   return (
     <Router>
-      <Switch>
-        <Route path="/home">
-          <StickyNav />
-          <Home />
-          <Footer />
+      <StickyNav/>
+      <Routes>
+        <Route path="/home" element={<Home />}>
+         
+        
         </Route>
-        <Route path="/questions">
-          <StickyNav />
-          <QuestionsAndAnswersHeader />
+        <Route path="/questions" element={ <QuestionsAndAnswersHeader />}>
+      
+         
         </Route>
-        <Route path="/news">
-          <StickyNav />
-          <News />
+        <Route path="/news" element={ <News />}>
+          
+         
         </Route>
-        <Route path="/profile">
-          <StickyNav />
-          <Profile />
+        <Route path="/profile" element={ <Profile />}>
+          
+         
         </Route>
-        <Route path="/controlnews">
-          <StickyNav />
-          <ControlNews />
+        <Route path="/controlnews" element ={ 
+          <ControlNews />}>
+         
         </Route>
-        <Route path="/controlprofile">
-          <StickyNav />
-          <ControlProfile />
+        <Route path="/controlprofile" element={<ControlProfile />}>
+          
+          
         </Route>
-        <Route path="/list">
-          <StickyNav />
-          <ListHeader />
+        <Route path="/list" element={ 
+          <ListHeader />}>
+         
         </Route>
-      </Switch>
+      </Routes>
     </Router>
   );
 }

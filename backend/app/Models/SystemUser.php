@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class SystemUser extends Model
 {
     use HasFactory;
+    protected $fillable = ["name", "username", "password","email","systemroles_id","status_id","cycle_id"];
     public function questions()
     {
         return $this->hasMany(Question::class);
