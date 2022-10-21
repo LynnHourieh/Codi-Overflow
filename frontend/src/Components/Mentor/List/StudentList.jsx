@@ -20,7 +20,7 @@ function StudentList({ item, allfilter ,setLoading ,setItem}) {
     <>
       <Table striped bordered hover>
         <thead>
-          <tr>
+          <tr >
             <th>id</th>
             <th>image</th>
             <th>Name</th>
@@ -33,7 +33,6 @@ function StudentList({ item, allfilter ,setLoading ,setItem}) {
         </thead>
         <tbody>
           {item.map((unit, index) => {
-           
             return (
               <tr key={index} onClick={() => Profile(unit.id)}>
                 <td>{unit.id}</td>
@@ -47,8 +46,12 @@ function StudentList({ item, allfilter ,setLoading ,setItem}) {
                 <td>{unit.name}</td>
                 <td>{unit.username}</td>
                 <td>{unit.email}</td>
-                {unit.sysrole.sys_name =="Student" ? (    <td>{unit.status.st_name}</td>):(<td>Mentor has no Status</td>)}
-            
+                {unit.sysrole.sys_name == "Student" ? (
+                  <td>{unit.status.st_name}</td>
+                ) : (
+                  <td>Mentor has no Status</td>
+                )}
+
                 <td>{unit.cycle.cy_name}</td>
                 <td>{unit.cycle.branch.br_name}</td>
               </tr>

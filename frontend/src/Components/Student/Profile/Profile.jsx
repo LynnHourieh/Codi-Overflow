@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import StickyNav from "../../Layout/StickyNav";
 
 const Profile=()=>{
    const [profile, setProfile] = useState(null);
@@ -40,10 +41,21 @@ const Profile=()=>{
        console.log(profile)
   
 
-    return (
+    return ( 
+    <><StickyNav/>
       <div className="container emp-profile">
+       
         <div className="eleven">
-          <h1>Profile</h1>
+          <h1>
+            <font color="#f54b9d">P</font>
+            <font color="#fbb107">R</font>
+            <font color="#2e489e">O</font>
+            <font color="#f54b9d">F</font>
+            <font color="#fbb107">I</font>
+            <font color="#2e489e">L</font>
+            <font color="#f54b9d">E</font>
+           
+          </h1>
         </div>
         <form method="post">
           <div className="row">
@@ -145,6 +157,7 @@ const Profile=()=>{
           </div>
         </form>
       </div>
+      </>
     );
 }
 export default Profile;

@@ -1,16 +1,18 @@
 import React from 'react'
 
 import News from '../Student/News/News';
-import QuestionsAndAnswersHeader from '../Student/Question&Answers/QuestionsAndAnswersHeader';
+
 import CarouselFade from "./CarouselFade";
 import CardsExample from "./CardsExample"
+import StickyNav from '../Layout/StickyNav';
 
 function Home() {
   return (
     <div>
+      <StickyNav/>
       <CarouselFade />
       <CardsExample/>
-      <QuestionsAndAnswersHeader />
+  
       <News />
     </div>
   );

@@ -142,7 +142,7 @@ function EditProfile(props) {
               </Form.Select>
             </Form.Group>
 
-            {props.classs == true && SelectedSystemRoles == 1 ? (
+            {SelectedSystemRoles == 1 ? (
               <Form.Group className="mb-3">
                 <Form.Label>Status</Form.Label>
 
@@ -157,9 +157,9 @@ function EditProfile(props) {
             ) : (
               ""
             )}
-            {props.classs == true &&
            
-            SelectedSystemRoles == 1 ? (
+           
+      
               <Form.Group className="mb-3">
                 <Form.Label>Cycle</Form.Label>
 
@@ -171,9 +171,7 @@ function EditProfile(props) {
                   ))}
                 </Form.Select>
               </Form.Group>
-            ) : (
-              ""
-            )}
+          
 
             <Form.Label>Upload image</Form.Label>
             <Form.Control

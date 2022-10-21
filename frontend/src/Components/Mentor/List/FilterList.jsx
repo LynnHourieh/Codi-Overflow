@@ -52,22 +52,30 @@ function FilterList() {
 
   return (
     <>
-   {/* <Search/> */}
-      <Nav className="justify-content-center">  
-     
-      <Nav.Link onClick={allfilter} className="filter_button">
+      {/* <Search/> */}
+      <Nav className="justify-content-center">
+        <Nav.Link
+          onClick={allfilter}
+          className="filter_button"
+          style={{ color: "#f54b9d" }}
+        >
           All
         </Nav.Link>
-        <Nav.Link onClick={() => filterItem(2)} className="filter_button">
-            Mentors
-          </Nav.Link>
-        <Nav.Link onClick={() => filterItem(1)} className="filter_button">
+        <Nav.Link
+          onClick={() => filterItem(2)}
+          className="filter_button"
+          style={{ color: "#fbb107" }}
+        >
+          Mentors
+        </Nav.Link>
+        <Nav.Link
+          onClick={() => filterItem(1)}
+          className="filter_button"
+          style={{ color: "#2e489e" }}
+        >
           Students
         </Nav.Link>
-        <Nav.Item>
-          
-        </Nav.Item>
-      
+        <Nav.Item></Nav.Item>
       </Nav>
       <StudentList
         profile={profile}

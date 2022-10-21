@@ -15,6 +15,10 @@ class SystemUserController extends Controller
         $systemUser = SystemUser::with('status', 'sysrole', "cycle.branch", "questions")->get();
         return response()->json($systemUser);
     }
+    public function get(){
+        $systemuser = DB::table('system_users')->get();
+        return response()->json($systemuser);
+    }
 
 
     public function getfilter()

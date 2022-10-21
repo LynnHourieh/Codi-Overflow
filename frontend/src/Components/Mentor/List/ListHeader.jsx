@@ -6,6 +6,8 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import ControlStickyNav from "../../Layout/ControlStickyNav";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 function ListHeader(props) {
   const [show, setShow] = useState(false);
@@ -20,6 +22,7 @@ function ListHeader(props) {
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
 
+  // const handleShow = () => setShow(true);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -65,15 +68,25 @@ function ListHeader(props) {
 
   return (
     <>
-      {" "}
+      <ControlStickyNav />
       <div className="eleven">
-        <h1>Participants</h1>
+        <h1>
+          {" "}
+          <font color="#f54b9d">P</font>
+          <font color="#fbb107">A</font>
+          <font color="#2e489e">R</font>
+          <font color="#f54b9d">T</font>
+          <font color="#fbb107">I</font>
+          <font color="#2e489e">C</font>
+          <font color="#f54b9d">I</font>
+          <font color="#fbb107">P</font>
+          <font color="#2e489e">A</font>
+          <font color="#f54b9d">N</font>
+          <font color="#fbb107">T</font>
+          <font color="#2e489e">S</font>
+        </h1>
       </div>{" "}
-      <ButtonGroup className="mb-2">
-        <Button onClick={handleShow}>New Student</Button>
-
-        <Button variant="danger">New Mentor</Button>
-      </ButtonGroup>
+      <PersonAddIcon onClick={handleShow} className="add_participants" />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add Student</Modal.Title>
@@ -113,10 +126,7 @@ function ListHeader(props) {
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Role</Form.Label>
-              <Form.Select
-               
-                onClick={(e) => selectrole(e.target.value)}
-              >
+              <Form.Select onClick={(e) => selectrole(e.target.value)}>
                 {props.sysroles.map((unit) => (
                   <option key={unit.id} value={unit.id}>
                     {unit.sys_name}
@@ -125,29 +135,26 @@ function ListHeader(props) {
               </Form.Select>
             </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Status</Form.Label>
+            {selectedsystemroles == 1 ? (
+              <Form.Group className="mb-3">
+                <Form.Label>Status</Form.Label>
 
-              <Form.Select
-               
-                onClick={(e) => selectstatus(e.target.value)}
-              >
-                {props.status.map((unit) => (
-                  <option key={unit.id} value={unit.id}>
-                    {unit.st_name}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
+                <Form.Select onClick={(e) => selectstatus(e.target.value)}>
+                  {props.status.map((unit) => (
+                    <option key={unit.id} value={unit.id}>
+                      {unit.st_name}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+            ) : (
+              ""
+            )}
 
-            <Form.Group className="mb-3">
+             <Form.Group className="mb-3">
               <Form.Label required>Cycle</Form.Label>
 
-              <Form.Select
-              
-                onClick={(e) => selectcycle(e.target.value)}
-               
-              >
+              <Form.Select onClick={(e) => selectcycle(e.target.value)}>
                 {props.cycle.map((unit) => (
                   <option key={unit.id} value={unit.id}>
                     {unit.cy_name}

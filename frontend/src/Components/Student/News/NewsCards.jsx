@@ -36,8 +36,14 @@ FetchNews();
     <div className="news_cards">
       {news.map((item)=>{
         return (
-          <Card style={{ width: "18rem" }} className="mb-2" key={item.id}>
-            <Card.Header>{item.ne_title}</Card.Header>
+          <Card
+            style={{ width: "18rem", borderColor: "#fbb107" }}
+            className="mb-2"
+            key={item.id}
+          >
+            <Card.Header style={{ color: "#2e489e", borderColor: "#fbb107" }}>
+              {item.ne_title}
+            </Card.Header>
             <Card.Body>
               <Card.Title> {item.ne_date} </Card.Title>
               <Card.Text>{item.ne_description}</Card.Text>

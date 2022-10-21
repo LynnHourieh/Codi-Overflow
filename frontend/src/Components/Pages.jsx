@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import News from "./Student/News/News";
-import StickyNav from "./Layout/StickyNav";
-import QuestionsAndAnswersHeader from "./Student/Question&Answers/QuestionsAndAnswersHeader";
+import QuestionsAndAnswersHeader from "./Mentor/Question&Answers/QuestionsAndAnswersHeader"
 import Profile from "./Student/Profile/Profile";
 import Home from "./Home/Home";
 import Footer from "./Layout/Footer";
@@ -11,6 +10,7 @@ import ControlProfile from "./Mentor/Profile/ControlProfile";
 import StudentList from "./Mentor/List/StudentList";
 import ListHeader from "./Mentor/List/ListHeader";
 import { alignPropType } from "react-bootstrap/esm/types";
+import Login from "./Login/Login";
 
 function Pages() {
   const [cycle, setCycle] = useState(null);
@@ -25,7 +25,52 @@ function Pages() {
   const [loadingSystemRole, setloadingSystemRole] = useState(true);
   const [loadingStatus, setloadingStatus] = useState(true);
   const [loadingCategory, setloadingCategory] = useState(true);
-
+  const[question,setQuestion]=useState(null);
+  const[loadingQuestion,setLoadingQuestion]=useState(true);
+    const [user, setUser] = useState(null);
+    const [loadinguser, setLoadinguser] = useState(true);
+      const FetchUsers = () => {
+        fetch(`${process.env.REACT_APP_Codi_URL}/api/getsysuser`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((reponse) => {
+            if (reponse.ok) {
+              return reponse.json();
+            }
+          })
+          .then((data) => {
+            setLoadinguser(false);
+            setUser(data);
+          })
+          .catch((error) => {
+            console.error(error.message);
+            setError(error);
+          });
+      };
+  const FetchQuestions = () => {
+    fetch(`${process.env.REACT_APP_Codi_URL}/api/question`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((reponse) => {
+        if (reponse.ok) {
+          return reponse.json();
+        }
+      })
+      .then((data) => {
+        setLoadingQuestion(false);
+        setQuestion(data);
+      })
+      .catch((error) => {
+        console.error(error.message);
+        setError(error);
+      });
+  };
   const FetchCycles = () => {
     fetch(`${process.env.REACT_APP_Codi_URL}/api/cycle`, {
       method: "GET",
@@ -139,7 +184,10 @@ function Pages() {
     FetchBranches();
     FetchCategories();
     FetchSysRoles();
+    FetchQuestions();
+    FetchUsers();
   }, []);
+
   // console.log(cycle);
   // console.log(status);
   // console.log(sysroles)
@@ -150,18 +198,24 @@ function Pages() {
     loadingBranch ||
     loadingSystemRole ||
     loadingStatus ||
-    loadingCategory
+    loadingCategory ||
+    loadingQuestion ||
+    loadinguser
   )
     return "loading";
   return (
     <Router>
-      <StickyNav />
       <Routes>
+        <Route path="/" element={<Login />}></Route>
         <Route path="/home" element={<Home />}></Route>
         <Route
+          path="/controlquestions"
+          element={<QuestionsAndAnswersHeader question={question} setQuestion={setQuestion}  category={category} user={user} setCategory={setCategory} setUser={setUser}/>}
+        ></Route>
+        {/* <Route
           path="/questions"
           element={<QuestionsAndAnswersHeader />}
-        ></Route>
+        ></Route> */}
         <Route path="/news" element={<News />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/controlnews" element={<ControlNews />}></Route>

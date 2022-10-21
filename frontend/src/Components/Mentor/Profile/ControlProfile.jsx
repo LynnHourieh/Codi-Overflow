@@ -4,12 +4,14 @@ import "./Profile.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import ControlStickyNav from "../../Layout/ControlStickyNav";
 const Profile = (props) => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [picture, setPicture] = useState(null);
-  const [classs, setClasss] = useState(false);
+ 
+ 
 
   // const navigate = useNavigate();
   const location = useLocation();
@@ -33,11 +35,8 @@ const Profile = (props) => {
       .then((data) => {
         setLoading(false);
         setProfile(data);
-        let example = data.map(function (unit) {
-          return [unit.sysrole.sys_name];
-        });
-              
-               {example[0][0] == "Student" ? setClasss(true) : setClasss(false);} 
+     
+        
               
        
       })
@@ -62,22 +61,29 @@ const Profile = (props) => {
       item.cycle.cy_name,
       item.cycle.branch.br_name,
       item.id,
-      item.status.st_name,
+    
       item.status_id,
       item.cycle_id,
       item.systemroles_id,
      
     ];
   });
-  // console.log(profiledetails);
+ 
   return (
     <>
-      <Button className="form " variant="primary" href="/list">
-        Go back to List
-      </Button>
+      <ControlStickyNav />
+   
       <div className="container emp-profile">
         <div className="eleven">
-          <h1>Profile</h1>
+          <h1>
+            <font color="#f54b9d">P</font>
+            <font color="#fbb107">R</font>
+            <font color="#2e489e">O</font>
+            <font color="#f54b9d">F</font>
+            <font color="#fbb107">I</font>
+            <font color="#2e489e">L</font>
+            <font color="#f54b9d">E</font>
+          </h1>
         </div>
         <form method="post">
           <div className="row">
@@ -87,22 +93,16 @@ const Profile = (props) => {
                   src={`${process.env.REACT_APP_Codi_URL}/pictures/${profiledetails[0][0]}`}
                   alt=""
                 />
-                {/* <div
-                className="file btn btn-lg btn-primary"
-                
-              >
-                Change Photo
-                <input type="file" name="file" onClick={onChangeFile}/>
-              </div> */}
+               
               </div>
             </div>
             <div className="col-md-6">
               <div className="profile-head">
                 <h5>{profiledetails[0][3].toUpperCase()}</h5>
-                {classs == true ? (
+                {profiledetails[0][1] == 1 ? (
                   <h6>
                     {" "}
-                    {profiledetails[0][1]}/{profiledetails[0][8]}
+                    {profiledetails[0][1]}/{}
                   </h6>
                 ) : (
                   <h6>{profiledetails[0][1]}</h6>
@@ -137,8 +137,7 @@ const Profile = (props) => {
               <EditProfile
                 profiledetails={profiledetails}
                 profile={profile}
-                classs={classs}
-                setClasss={setClasss}
+               
                 brnach={props.branch}
                 cycle={props.cycle}
                 sysrole={props.sysrole}

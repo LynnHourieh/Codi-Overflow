@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->string('q_text');
-            $table->string("q_image");
+            $table->string("q_image")->nullable();
             $table->string('q_date');
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('system_user_id')->constrained('system_users');

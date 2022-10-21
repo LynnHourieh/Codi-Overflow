@@ -4,10 +4,11 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SystemRoleController;
 use App\Http\Controllers\SystemUserController;
-
+use App\Models\SystemUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,11 @@ Route::delete('/deletenews/{id}', [NewsController::class, 'destroy']);
 Route::get("/category",[CategoryController::class,'index']);
 //-----------------Category------------------//
 
+//-----------------Question------------------//
+Route::get("/question", [QuestionController::class, 'index']);
+Route::POST("/addquestion", [QuestionController::class, 'store']);
+//-----------------Question------------------//
+
 //-----------------SystemRole------------------//
 Route::get("/sysrole",[SystemRoleController::class,'index']);
 //-----------------SystemRole------------------//
@@ -54,6 +60,7 @@ Route::get("/branch", [BranchController::class, 'index']);
 //-----------------Branch------------------//
 
 //-----------------System_user------------------//
+Route::get("/getsysuser",[SystemUser::class,"get"]);
 Route::get("/sysuser", [SystemUserController::class, 'index']);
 Route::POST("/addsysuser", [SystemUserController::class, 'store']);
 Route::PUT("/updatesysuser/{id}", [SystemUserController::class, 'update']);

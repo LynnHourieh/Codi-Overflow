@@ -124,13 +124,17 @@ function NewsCards() {
     <div className="news_cards">
       {news.map((item) => {
         return (
-          <Card style={{ width: "18rem" }} className="mb-2" key={item.id}>
-            <Card.Header>
+          <Card
+            style={{ width: "18rem", borderColor: "#2e489e" }}
+            className="mb-2"
+            key={item.id}
+          >
+            <Card.Header style={{ borderColor: "#2e489e" }}>
               <Dropdown>
                 <Dropdown.Toggle as={CustomToggle}></Dropdown.Toggle>
                 <Dropdown.Menu size="sm" title="">
                   <Dropdown.Header
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer", color: "#f54b9d" }}
                     onClick={() => {
                       EdithandleShow();
                       setId(item.id);
@@ -142,7 +146,7 @@ function NewsCards() {
                   </Dropdown.Header>
                   <Dropdown.Divider />
                   <Dropdown.Header
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer", color: "#f54b9d" }}
                     onClick={() => {
                       handleShow();
                       setId(item.id);
@@ -153,7 +157,10 @@ function NewsCards() {
                 </Dropdown.Menu>
               </Dropdown>
 
-              <Card.Title className="news_title"> {item.ne_title}</Card.Title>
+              <Card.Title className="news_title" style={{ color: "#2e489e" }}>
+                {" "}
+                {item.ne_title}
+              </Card.Title>
             </Card.Header>
             <Card.Body>
               <Card.Title className="news_date"> {item.ne_date} </Card.Title>

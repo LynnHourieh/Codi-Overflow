@@ -24,7 +24,7 @@
     border: none;
     border-radius: 0;
     font-size: 15px;
-    background: #212529b8;
+    
 }
 .profile-img .file input {
     position: absolute;
@@ -33,10 +33,10 @@
     top: 0;
 }
 .profile-head h5{
-    color: #333;
+    color: #f54b9d
 }
 .profile-head h6{
-    color: #0062cc;
+    color: #2e489e;
 }
 .profile-edit-btn{
     border: none;
@@ -49,11 +49,11 @@
 }
 .proile-rating{
     font-size: 12px;
-    color: #818182;
+    color: #2e489e;
     margin-top: 5%;
 }
 .proile-rating span{
-    color: #495057;
+    color: #fbb107;
     font-size: 15px;
     font-weight: 600;
 }
@@ -63,10 +63,11 @@
 .profile-head .nav-tabs .nav-link{
     font-weight:600;
     border: none;
+    color:#fbb107
 }
 .profile-head .nav-tabs .nav-link.active{
     border: none;
-    border-bottom:2px solid #0062cc;
+    border-bottom:2px solid #fbb107;
 }
 .profile-work{
     padding: 14%;
@@ -74,7 +75,7 @@
 }
 .profile-work p{
     font-size: 12px;
-    color: #818182;
+    color: #2e489e;
     font-weight: 600;
     margin-top: 10%;
 }
@@ -92,5 +93,6 @@
 }
 .profile-tab p{
     font-weight: 600;
-    color: #0062cc;
+    color: #2e489e;
 }
+.active{color:#f54b9d}

@@ -47,12 +47,12 @@ h1:after {
   left:50%; margin-left:-30%;
   height: 1px;
   content: "";
-  background-color: #777; z-index: 4;
+  background-color: #fbb107; z-index: 4;
 }
 .eleven h1:after {
   position:absolute;
   width:40px; height:40px; left:50%; margin-left:-20px; bottom:0px;
-  content: '\00a7'; font-size:30px; line-height:40px; color:#c50000;
+  content: '\00a7'; font-size:30px; line-height:40px; color:#f54b9d;
   font-weight:400; z-index: 5;
   display:block;
   background-color:#f8f8f8;
@@ -70,9 +70,9 @@ h1 {
   -o-transition: all 0.4s ease 0s;
   transition: all 0.4s ease 0s;
 }
-.add_news{color:#c50000;
+.add_news{color:#f54b9d;
 float: right;}
-.news_options{color:#c50000;
+.news_options{color:#fbb107;
 float: right;}
 .news_title{text-align: center;
   font-weight: lighter;
@@ -90,7 +90,7 @@ float: right;
 cursor: pointer;
 }
 th{font-weight:500;
-color:#c50000}
+color:#2e489e}
 
 /*------------------Student List-------------*/
 .list_images{
@@ -102,6 +102,11 @@ color:#c50000}
 font-weight: 500;
 font-size: 20px;}
 
-
+.add_participants{
+  color:#f54b9d;
+  cursor: pointer;
+  float: right;
+  font-size: 20px;
+}
 
 /*------------------Student List-------------*/
