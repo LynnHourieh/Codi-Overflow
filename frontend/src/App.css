@@ -16,7 +16,10 @@ text-align: center;}
 }
 .form{
 display: flex;
-float: right;}
+float: right;
+background-color: #f54b9d;
+border-color:#f54b9d;}
+
 
 .grid_news{
   display: flex;

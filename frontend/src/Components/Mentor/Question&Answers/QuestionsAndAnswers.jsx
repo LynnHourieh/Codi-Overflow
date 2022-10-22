@@ -35,7 +35,7 @@ export default function QuestionsAndAnswers(props) {
       sx={{ width: "400", maxWidth: 750, bgcolor: "background.paper" }}
       className="questionlist"
     >
-      {props.question.map((unit)=>{
+      {props.value.map((unit)=>{
         return (
           <ListItem alignItems="flex-start" className="items">
             <ListItemAvatar>

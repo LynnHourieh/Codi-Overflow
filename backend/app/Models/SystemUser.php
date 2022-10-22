@@ -29,4 +29,8 @@ class SystemUser extends Model
     {
         return $this->belongsTo(Systemrole::class, 'systemroles_id');
     }
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
 }

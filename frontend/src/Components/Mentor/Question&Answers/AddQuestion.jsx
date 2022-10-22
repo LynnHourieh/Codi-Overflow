@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
-function AddQuestion() {
+function AddQuestion(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

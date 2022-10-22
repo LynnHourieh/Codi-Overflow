@@ -29,16 +29,16 @@ function QuestionsAndAnswersHeader(props) {
           <font color="#fbb107">s</font>
         </h1>
       </div>
-      <QuestionCategoryHeader />
-      <AddQuestion />
-      <QuestionsAndAnswers
+      <QuestionCategoryHeader
+        category={props.category}
+        setCategory={props.setCategory}
         question={props.question}
         setQuestion={props.setQuestion}
-        category={props.category}
-        user={props.user}
-        setCategory={props.setCategory}
-        setUser={props.setUser}
+        item={props.item}
+        setItem={props.setItem}
       />
+  
+  
     </div>
   );
 }

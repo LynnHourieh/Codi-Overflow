@@ -29,6 +29,7 @@ function Pages() {
   const[loadingQuestion,setLoadingQuestion]=useState(true);
     const [user, setUser] = useState(null);
     const [loadinguser, setLoadinguser] = useState(true);
+    const[item,setItem]=useState(null);
       const FetchUsers = () => {
         fetch(`${process.env.REACT_APP_Codi_URL}/api/getsysuser`, {
           method: "GET",
@@ -65,6 +66,7 @@ function Pages() {
       .then((data) => {
         setLoadingQuestion(false);
         setQuestion(data);
+        setItem(data)
       })
       .catch((error) => {
         console.error(error.message);
@@ -210,7 +212,7 @@ function Pages() {
         <Route path="/home" element={<Home />}></Route>
         <Route
           path="/controlquestions"
-          element={<QuestionsAndAnswersHeader question={question} setQuestion={setQuestion}  category={category} user={user} setCategory={setCategory} setUser={setUser}/>}
+          element={<QuestionsAndAnswersHeader question={question} setQuestion={setQuestion}  category={category} user={user} setCategory={setCategory} setUser={setUser}/>} item={item} setItem={setItem}
         ></Route>
         {/* <Route
           path="/questions"
