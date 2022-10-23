@@ -1,16 +1,18 @@
 <?php
 
-use App\Http\Controllers\BranchController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CycleController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\StatusController;
-use App\Http\Controllers\SystemRoleController;
-use App\Http\Controllers\SystemUserController;
+use App\Http\Controllers\AnswerController;
 use App\Models\SystemUser;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Login;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\CycleController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\StatusController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SystemRoleController;
+use App\Http\Controllers\SystemUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,12 @@ Route::get("/question", [QuestionController::class, 'index']);
 Route::POST("/addquestion", [QuestionController::class, 'store']);
 //-----------------Question------------------//
 
+
+//-----------------Answer------------------//
+Route::get("/answer", [AnswerController::class, 'index']);
+
+//-----------------Answer------------------//
+
 //-----------------SystemRole------------------//
 Route::get("/sysrole",[SystemRoleController::class,'index']);
 //-----------------SystemRole------------------//
@@ -73,3 +81,9 @@ Route::get("/search/{id}", [SystemUserController::class, 'search']);
 
 Route::get("/cycle", [CycleController::class, 'index']);
 //-----------------Cycle------------------//
+
+
+//-------------------Login---------------//
+Route::resource('/role', Login::class);
+
+//-------------------Login---------------//

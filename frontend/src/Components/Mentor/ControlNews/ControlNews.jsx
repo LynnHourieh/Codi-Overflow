@@ -7,7 +7,7 @@ import ControlStickyNav from "../../Layout/ControlStickyNav";
 function News() {
   return (
     <div>
-      <ControlStickyNav/>
+   
       <div className="eleven">
         <h1>
           {" "}

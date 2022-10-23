@@ -68,7 +68,6 @@ function ListHeader(props) {
 
   return (
     <>
-      <ControlStickyNav />
       <div className="eleven">
         <h1>
           {" "}
@@ -88,8 +87,24 @@ function ListHeader(props) {
       </div>{" "}
       <PersonAddIcon onClick={handleShow} className="add_participants" />
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Student</Modal.Title>
+        <Modal.Header closeButton className="header_form">
+          <Modal.Title>
+            <font color="#f54b9d">A</font>
+            <font color="#fbb107">D</font>
+            <font color="#2e489e">D </font>
+            <font color="#f54b9d">P</font>
+            <font color="#fbb107">A</font>
+            <font color="#2e489e">R</font>
+            <font color="#f54b9d">T</font>
+            <font color="#fbb107">I</font>
+            <font color="#2e489e">C</font>
+            <font color="#f54b9d">I</font>
+            <font color="#fbb107">P</font>
+            <font color="#2e489e">A</font>
+            <font color="#f54b9d">N</font>
+            <font color="#fbb107">T</font>
+            <font color="#2e489e">S</font>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -101,6 +116,7 @@ function ListHeader(props) {
                 value={username}
                 onChange={(e) => setusername(e.target.value)}
                 autoFocus
+                className="header_form"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -111,6 +127,7 @@ function ListHeader(props) {
                 value={name}
                 onChange={(e) => setname(e.target.value)}
                 autoFocus
+                className="header_form"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -121,12 +138,16 @@ function ListHeader(props) {
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
                 autoFocus
+                className="header_form"
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Role</Form.Label>
-              <Form.Select onClick={(e) => selectrole(e.target.value)}>
+              <Form.Select
+                onClick={(e) => selectrole(e.target.value)}
+                className="header_form"
+              >
                 {props.sysroles.map((unit) => (
                   <option key={unit.id} value={unit.id}>
                     {unit.sys_name}
@@ -139,7 +160,10 @@ function ListHeader(props) {
               <Form.Group className="mb-3">
                 <Form.Label>Status</Form.Label>
 
-                <Form.Select onClick={(e) => selectstatus(e.target.value)}>
+                <Form.Select
+                  onClick={(e) => selectstatus(e.target.value)}
+                  className="header_form"
+                >
                   {props.status.map((unit) => (
                     <option key={unit.id} value={unit.id}>
                       {unit.st_name}
@@ -151,10 +175,13 @@ function ListHeader(props) {
               ""
             )}
 
-             <Form.Group className="mb-3">
+            <Form.Group className="mb-3">
               <Form.Label required>Cycle</Form.Label>
 
-              <Form.Select onClick={(e) => selectcycle(e.target.value)}>
+              <Form.Select
+                onClick={(e) => selectcycle(e.target.value)}
+                className="header_form"
+              >
                 {props.cycle.map((unit) => (
                   <option key={unit.id} value={unit.id}>
                     {unit.cy_name}
@@ -169,19 +196,20 @@ function ListHeader(props) {
               placeholder="status"
               autoFocus
               onChange={onImageChange}
+              className="header_form"
             />
 
             <br></br>
-            <Form.Text className="text-muted">
+            <Form.Text className="note" >
               you can add image to make your question clear
             </Form.Text>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button onClick={handleClose} className="close_button">
             Close
           </Button>
-          <Button variant="primary" onClick={newParticipent}>
+          <Button className="submit_button" onClick={newParticipent}>
             Submit
           </Button>
         </Modal.Footer>

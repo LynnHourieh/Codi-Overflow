@@ -9,7 +9,7 @@ import StickyNav from '../Layout/StickyNav';
 function Home() {
   return (
     <div>
-      <StickyNav/>
+    
       <CarouselFade />
       <CardsExample/>
   

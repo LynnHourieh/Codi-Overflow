@@ -113,3 +113,30 @@ font-size: 20px;}
 }
 
 /*------------------Student List-------------*/
+
+
+/*--------------------form----------------------*/
+.close_button{
+  background-color: #fbb107;
+  border-color: #fbb107;
+}
+.submit_button{
+  background-color: #2e489e;
+  border-color: #2e489e;
+}
+.header_form{
+  border-color: #f54b9d;
+ 
+  
+}
+.note{
+  color:#2e489e
+}
+/*--------------------form----------------------*/
+
+.navbar_color{
+  color:#f54b9d
+}
+.navbar_color:hover{
+  color:#2e489e
+}

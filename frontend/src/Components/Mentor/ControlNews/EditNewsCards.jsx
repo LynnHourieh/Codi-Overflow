@@ -172,31 +172,64 @@ function NewsCards() {
       })}
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Alert!</Modal.Title>
+        <Modal.Header closeButton className="header_form">
+          <Modal.Title>
+            {" "}
+            <font color="#f54b9d">A</font>
+            <font color="#fbb107">L</font>
+            <font color="#2e489e">E</font>
+            <font color="#f54b9d">R</font>
+            <font color="#fbb107">T</font>
+            <font color="#2e489e"> !</font>
+          
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>
+              <Form.Label className="note">
                 Are you sure you want to delete this announcment?
               </Form.Label>
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer className="header_form">
+          <Button
+            variant="secondary"
+            onClick={handleClose}
+            className="close_button"
+          >
             Close
           </Button>
-          <Button variant="primary" onClick={DeleteNews}>
+          <Button
+            variant="primary"
+            onClick={DeleteNews}
+            className="submit_button"
+          >
             Delete anyway
           </Button>
         </Modal.Footer>
       </Modal>
 
       <Modal show={editshow} onHide={EdithandleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Announcment</Modal.Title>
+        <Modal.Header closeButton className="header_form">
+          <Modal.Title>
+            <font color="#2e489e">E</font>
+            <font color="#f54b9d">D</font>
+            <font color="#fbb107">I</font>
+            <font color="#2e489e">T </font>
+            <font color="#2e489e">A</font>
+            <font color="#f54b9d">N</font>
+            <font color="#fbb107">N</font>
+            <font color="#2e489e">O</font>
+            <font color="#f54b9d">U</font>
+            <font color="#fbb107">N</font>
+            <font color="#2e489e">C</font>
+            <font color="#f54b9d">M</font>
+            <font color="#fbb107">E</font>
+            <font color="#2e489e">N</font>
+            <font color="#f54b9d">T</font>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -207,18 +240,20 @@ function NewsCards() {
                 placeholder="your name"
                 value={ne_title}
                 autoFocus
+                className="header_form"
                 onChange={(e) => {
                   setne_title(e.target.value);
                 }}
               />
             </Form.Group>
-         
+
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Description</Form.Label>
               <Form.Control
+                className="header_form"
                 as="textarea"
                 rows={3}
                 placeholder="What do you have?"
@@ -231,11 +266,19 @@ function NewsCards() {
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={EdithandleClose}>
+        <Modal.Footer className="header_form">
+          <Button
+            variant="secondary"
+            className="close_button"
+            onClick={EdithandleClose}
+          >
             Close
           </Button>
-          <Button variant="primary" onClick={EditNews}>
+          <Button
+            variant="primary"
+            className="submit_button"
+            onClick={EditNews}
+          >
             Edit Announcment
           </Button>
         </Modal.Footer>

@@ -35,12 +35,30 @@ function AddNews() {
   };
   return (
     <>
-      <AddCircleIcon variant="primary" className="add_news" onClick={handleShow}/>
-   
+      <AddCircleIcon
+        variant="primary"
+        className="add_news"
+        onClick={handleShow}
+      />
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Announcment</Modal.Title>
+        <Modal.Header closeButton className="header_form">
+          <Modal.Title>
+            <font color="#fbb107">A</font>
+            <font color="#2e489e">D</font>
+            <font color="#f54b9d">D </font>
+            <font color="#2e489e">A</font>
+            <font color="#f54b9d">N</font>
+            <font color="#fbb107">N</font>
+            <font color="#2e489e">O</font>
+            <font color="#f54b9d">U</font>
+            <font color="#fbb107">N</font>
+            <font color="#2e489e">C</font>
+            <font color="#f54b9d">M</font>
+            <font color="#fbb107">E</font>
+            <font color="#2e489e">N</font>
+            <font color="#f54b9d">T</font>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -51,6 +69,7 @@ function AddNews() {
                 placeholder="your name"
                 value={ne_title}
                 autoFocus
+                className="header_form"
                 onChange={(e) => {
                   setne_title(e.target.value);
                 }}
@@ -67,19 +86,20 @@ function AddNews() {
                 rows={3}
                 placeholder="What do you have?"
                 value={ne_description}
-                onChange={(e)=>{
-                    setne_description(e.target.value)
+                className="header_form"
+                onChange={(e) => {
+                  setne_description(e.target.value);
                 }}
                 required
               />
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer className="header_form">
+          <Button variant="secondary" onClick={handleClose} className="close_button">
             Close
           </Button>
-          <Button variant="primary" onClick={newAnnouncment}>
+          <Button variant="primary" onClick={newAnnouncment} className="submit_button">
             Post Announcment
           </Button>
         </Modal.Footer>

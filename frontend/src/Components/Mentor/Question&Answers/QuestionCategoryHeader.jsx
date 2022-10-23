@@ -16,6 +16,7 @@ function QuestionCategoryHeader(props) {
 const allfilter = () => {
   setValue(props.question);
 };
+
   return (
     <>
       <Nav className="justify-content-center" activeKey="/home">
@@ -59,6 +60,8 @@ const allfilter = () => {
         setUser={props.setUser}
         value={value}
         setValue={setValue}
+        answer={props.answer}
+        setAnswer={props.setAnswer}
       />
     </>
   );

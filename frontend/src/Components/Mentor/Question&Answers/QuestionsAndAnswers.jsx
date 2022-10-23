@@ -15,6 +15,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import TooltipPositioned from "./TooltipPositioned";
 
 export default function QuestionsAndAnswers(props) {
+ 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
       href=""
@@ -37,7 +38,7 @@ export default function QuestionsAndAnswers(props) {
     >
       {props.value.map((unit)=>{
         return (
-          <ListItem alignItems="flex-start" className="items">
+          <ListItem alignItems="flex-start" className="items" key={unit.id}>
             <ListItemAvatar>
               <Avatar alt="Remy Sharp" src={`${process.env.REACT_APP_Codi_URL}/pictures/${unit.system_user.picture}`} />
             </ListItemAvatar>
@@ -59,10 +60,10 @@ export default function QuestionsAndAnswers(props) {
                     </Dropdown.Menu>
                   </Dropdown>
 
-                  <div className="test">
+                  <p className="test">
                     <Typography
                       sx={{ display: "inline" }}
-                      component="span"
+                     
                       variant="body2"
                       color="text.primary"
                     >
@@ -70,7 +71,7 @@ export default function QuestionsAndAnswers(props) {
                       <br></br>
                     </Typography>
                     <TooltipPositioned />
-                  </div>
+                  </p>
                   {unit.q_text}
                   <img
                     src={`${process.env.REACT_APP_Codi_URL}/pictures/${unit.q_image}`}
@@ -79,61 +80,42 @@ export default function QuestionsAndAnswers(props) {
                   <Accordion defaultActiveKey="0" flush>
                     <Accordion.Item eventKey="0">
                       <Accordion.Header>Answer</Accordion.Header>
-                      <Accordion.Body>
-                        <ListItem alignItems="flex-start">
-                          <ListItemAvatar>
-                            <Avatar
-                              alt="Travis Howard"
-                              src="/static/images/avatar/2.jpg"
-                            />
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary="Summer BBQ"
-                            secondary={
-                              <React.Fragment>
-                                <Typography
-                                  sx={{ display: "inline" }}
-                                  component="span"
-                                  variant="body2"
-                                  color="text.primary"
-                                >
-                                  to Scott, Alex, Jennifer
-                                </Typography>
-                                {
-                                  " — Wish I could come, but I'm out of town this…"
+                      {props.answer.map((item)=>{
+                        
+                        return unit.id==item.question_id?(
+                          <Accordion.Body key={unit.key}>
+                            <ListItem alignItems="flex-start">
+                              <ListItemAvatar>
+                                <Avatar
+                                  alt="Travis Howard"
+                                  src={`${process.env.REACT_APP_Codi_URL}/pictures/${item.system_user.picture}`}
+                                />
+                              </ListItemAvatar>
+                              <ListItemText
+                                primary={item.system_user.name}
+                                secondary={
+                                  <React.Fragment>
+                                    <Typography
+                                      sx={{ display: "inline" }}
+                                      variant="body2"
+                                      color="text.primary"
+                                    >
+                                      {item.a_text}
+                                      <img
+                                        src={`${process.env.REACT_APP_Codi_URL}/pictures/${item.a_image}`}
+                                        style={{ width: "100%" }}
+                                      />
+                                    </Typography>
+                                    {item.a_date}
+                                  </React.Fragment>
                                 }
-                              </React.Fragment>
-                            }
-                          />
-                        </ListItem>
-                        <Divider variant="inset" component="li" />
-                        <ListItem alignItems="flex-start">
-                          <ListItemAvatar>
-                            <Avatar
-                              alt="Travis Howard"
-                              src="/static/images/avatar/2.jpg"
-                            />
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary="Summer BBQ"
-                            secondary={
-                              <React.Fragment>
-                                <Typography
-                                  sx={{ display: "inline" }}
-                                  component="span"
-                                  variant="body2"
-                                  color="text.primary"
-                                >
-                                  to Scott, Alex, Jennifer
-                                </Typography>
-                                {
-                                  " — Wish I could come, but I'm out of town this…"
-                                }
-                              </React.Fragment>
-                            }
-                          />
-                        </ListItem>
-                      </Accordion.Body>
+                              />
+                            </ListItem>
+                            <Divider variant="inset" />
+                          </Accordion.Body>
+                        ):("");
+                      })}
+                      
                     </Accordion.Item>
                   </Accordion>
                 </React.Fragment>

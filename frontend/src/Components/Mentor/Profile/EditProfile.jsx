@@ -86,8 +86,26 @@ function EditProfile(props) {
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Profile</Modal.Title>
+        <Modal.Header closeButton className="header_form">
+          <Modal.Title>
+            {" "}
+            <font color="#f54b9d">E</font>
+            <font color="#fbb107">D</font>
+            <font color="#2e489e">I</font>
+            <font color="#f54b9d">T </font>
+            <font color="#f54b9d">P</font>
+            <font color="#fbb107">A</font>
+            <font color="#2e489e">R</font>
+            <font color="#f54b9d">T</font>
+            <font color="#fbb107">I</font>
+            <font color="#2e489e">C</font>
+            <font color="#f54b9d">I</font>
+            <font color="#fbb107">P</font>
+            <font color="#2e489e">A</font>
+            <font color="#f54b9d">N</font>
+            <font color="#fbb107">T</font>
+            <font color="#2e489e">S</font>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -97,6 +115,7 @@ function EditProfile(props) {
                 type="text"
                 placeholder="your username"
                 autoFocus
+                className="header_form"
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
@@ -112,6 +131,7 @@ function EditProfile(props) {
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
+                className="header_form"
                 autoFocus
               />
             </Form.Group>
@@ -126,14 +146,16 @@ function EditProfile(props) {
                   setEmail(e.target.value);
                   console.log(email);
                 }}
+                className="header_form"
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Role</Form.Label>
-              <Form.Select 
-              
-              onClick={(e) => selectfun(e.target.value)}>
+              <Form.Select
+                className="header_form"
+                onClick={(e) => selectfun(e.target.value)}
+              >
                 {props.sysroles.map((unit) => (
                   <option key={unit.id} value={unit.id}>
                     {unit.sys_name}
@@ -146,7 +168,10 @@ function EditProfile(props) {
               <Form.Group className="mb-3">
                 <Form.Label>Status</Form.Label>
 
-                <Form.Select onClick={(e) => selectStatus(e.target.value)}>
+                <Form.Select
+                  className="header_form"
+                  onClick={(e) => selectStatus(e.target.value)}
+                >
                   {props.status.map((unit) => (
                     <option key={unit.id} value={unit.id}>
                       {unit.st_name}
@@ -157,41 +182,45 @@ function EditProfile(props) {
             ) : (
               ""
             )}
-           
-           
-      
-              <Form.Group className="mb-3">
-                <Form.Label>Cycle</Form.Label>
 
-                <Form.Select onClick={(e) => selectcycle(e.target.value)}>
-                  {props.cycle.map((unit) => (
-                    <option key={unit.id} value={unit.id}>
-                      {unit.cy_name}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-          
+            <Form.Group className="mb-3">
+              <Form.Label>Cycle</Form.Label>
+
+              <Form.Select
+                className="header_form"
+                onClick={(e) => selectcycle(e.target.value)}
+              >
+                {props.cycle.map((unit) => (
+                  <option key={unit.id} value={unit.id}>
+                    {unit.cy_name}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
 
             <Form.Label>Upload image</Form.Label>
             <Form.Control
+              className="header_form"
               type="file"
               placeholder="status"
               onChange={onChangeFile}
               autoFocus
             />
-
-            <br></br>
-            <Form.Text className="text-muted">
-              you can add image to make your question clear
-            </Form.Text>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer className="header_form">
+          <Button
+            variant="secondary"
+            className="close_button"
+            onClick={handleClose}
+          >
             Close
           </Button>
-          <Button variant="primary" onClick={EditProfiledetails}>
+          <Button
+            variant="primary"
+            onClick={EditProfiledetails}
+            className="submit_button"
+          >
             Accept Edit
           </Button>
         </Modal.Footer>

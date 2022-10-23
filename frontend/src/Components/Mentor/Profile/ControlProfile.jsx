@@ -15,7 +15,7 @@ const Profile = (props) => {
 
   // const navigate = useNavigate();
   const location = useLocation();
-  //  console.log(location.state.id);
+   console.log(location.state.id);
 
   const FetchProfile = () => {
     fetch(
@@ -71,7 +71,7 @@ const Profile = (props) => {
  
   return (
     <>
-      <ControlStickyNav />
+
    
       <div className="container emp-profile">
         <div className="eleven">

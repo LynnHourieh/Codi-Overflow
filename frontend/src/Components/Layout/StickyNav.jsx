@@ -6,8 +6,10 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import  codi from  "../Images/codi.png"
+import { Outlet } from "react-router";
 function StickyNav() {
   return (
+    <>
     <Navbar bg="light" expand="lg" sticky="top">
       <Container fluid>
         <Navbar.Brand>
@@ -45,6 +47,8 @@ function StickyNav() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    <Outlet/>
+    </>
   );
 }
 

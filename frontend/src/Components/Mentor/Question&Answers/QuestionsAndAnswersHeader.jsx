@@ -5,9 +5,12 @@ import AddQuestion from "./AddQuestion";
 import QuestionCategoryHeader from "./QuestionCategoryHeader";
 import StickyNav from '../../Layout/StickyNav';
 function QuestionsAndAnswersHeader(props) {
+
+
   return (
+   
     <div>
-      <StickyNav />
+     
       <div className="eleven">
         <h1>
           <font color="#f54b9d">Q</font>
@@ -36,6 +39,8 @@ function QuestionsAndAnswersHeader(props) {
         setQuestion={props.setQuestion}
         item={props.item}
         setItem={props.setItem}
+        answer={props.answer}
+        setAnswer={props.setAnswer}
       />
   
   

@@ -12,13 +12,25 @@ function AddQuestion(props) {
 
   return (
     <>
-      <Button  onClick={handleShow} className="form">
+      <Button onClick={handleShow} className="form">
         Ask a Question
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>New Question</Modal.Title>
+        <Modal.Header closeButton className="header_form">
+          <Modal.Title>
+            <font color="#f54b9d">N</font>
+            <font color="#fbb107">e</font>
+            <font color="#2e489e">w </font>
+            <font color="#f54b9d">Q</font>
+            <font color="#fbb107">u</font>
+            <font color="#2e489e">e</font>
+            <font color="#f54b9d">s</font>
+            <font color="#fbb107">t</font>
+            <font color="#2e489e">i</font>
+            <font color="#f54b9d">o</font>
+            <font color="#fbb107">n</font>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -29,11 +41,12 @@ function AddQuestion(props) {
                 placeholder="your name"
                 autoFocus
                 disabled
+                className="header_form"
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Category</Form.Label>
-              <Form.Select>
+              <Form.Select className="header_form">
                 <option> Select Here</option>
                 <option>FrontEnd</option>
                 <option>BackEnd</option>
@@ -45,25 +58,36 @@ function AddQuestion(props) {
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>your Question</Form.Label>
-              <Form.Control as="textarea" rows={3} required />
-              <Form.Text className="text-muted">
+              <Form.Control
+                as="textarea"
+                rows={3}
+                required
+                className="header_form"
+              />
+              <Form.Text className="note">
                 Try to be clear in your question to be easily answered
               </Form.Text>
             </Form.Group>
             <Form.Label>Upload image</Form.Label>
             <br></br>
-            <AddPhotoAlternateIcon />
+            <Form.Control
+              className="header_form"
+              type="file"
+              placeholder="status"
+              
+              autoFocus
+            />
             <br></br>
-            <Form.Text className="text-muted">
+            <Form.Text className="note">
               you can add image to make your question clear
             </Form.Text>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose} className="close_button">
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleClose} className="submit_button">
             Post Question
           </Button>
         </Modal.Footer>

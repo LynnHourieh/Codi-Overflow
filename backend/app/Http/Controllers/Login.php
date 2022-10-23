@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Answer;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
-class AnswerController extends Controller
+class Login extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $answer = Answer::with('system_user',"question")->get();
-        return response()->json($answer);
+        $token = Str::random(60);
+        $username = $request->input('username');
+        $password = $request->input('password');
+        $task = DB::table('systemroles')->join('system_users', 'system_users.systemroles_id', 'systemroles.id')->where("system_users.username", $username)->where("system_users.password", $password)->get();
+
+
+        return ['status' => $task, 'token' => $token];
     }
 
     /**
@@ -42,10 +49,10 @@ class AnswerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Answer  $answer
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Answer $answer)
+    public function show($id)
     {
         //
     }
@@ -53,10 +60,10 @@ class AnswerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Answer  $answer
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Answer $answer)
+    public function edit($id)
     {
         //
     }
@@ -65,10 +72,10 @@ class AnswerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Answer  $answer
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Answer $answer)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +83,10 @@ class AnswerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Answer  $answer
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Answer $answer)
+    public function destroy($id)
     {
         //
     }

@@ -6,7 +6,7 @@ import StickyNav from '../../Layout/StickyNav';
 function News() {
   return (
     <div>
-      <StickyNav/>
+     
       <div className="eleven">
         <h1>
           <font color="#f54b9d">C</font>
