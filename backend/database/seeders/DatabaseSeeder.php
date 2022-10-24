@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Answer;
 use App\Models\Branch;
 use App\Models\Category;
 use App\Models\Cycle;
@@ -30,7 +31,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         Branch::create([
-            "br_name"=>"Zahle"
+            "br_name" => "Zahle"
         ]);
         Branch::create([
             "br_name" => "Beruit"
@@ -39,17 +40,17 @@ class DatabaseSeeder extends Seeder
             "br_name" => "Tripoli"
         ]);
         Cycle::create([
-            "cy_name"=>"Z01",
-            "branch_id"=>1
+            "cy_name" => "Z01",
+            "branch_id" => 1
         ]);
-          Cycle::create([
-            "cy_name"=>"B01",
-            "branch_id"=>2
-          ]);
-            Cycle::create([
-            "cy_name"=>"T01",
-            "branch_id"=>3
-            ]);
+        Cycle::create([
+            "cy_name" => "B01",
+            "branch_id" => 2
+        ]);
+        Cycle::create([
+            "cy_name" => "T01",
+            "branch_id" => 3
+        ]);
         Cycle::create([
             "cy_name" => "B02",
             "branch_id" => 2
@@ -59,44 +60,54 @@ class DatabaseSeeder extends Seeder
             "branch_id" => 3
         ]);
         Systemrole::create([
-            "sys_name"=>"Student",
-       
+            "sys_name" => "Student",
+
         ]);
-         Systemrole::create([
-            "sys_name"=>"Mentor"
-         ]);
-         Status::create([
-            "st_name"=>"ungraduated",
-            
-         ]);
+        Systemrole::create([
+            "sys_name" => "Mentor"
+        ]);
+        Status::create([
+            "st_name" => "ungraduated",
+
+        ]);
         Status::create([
             "st_name" => "alumni",
 
         ]);
 
         News::create([
-            "ne_title"=>"Job Opportunity",
-            "ne_description"=>"Frontend web developer needed in Tripoli",
-            "ne_date"=>"3/3/2021",
+            "ne_title" => "Job Opportunity",
+            "ne_description" => "Frontend web developer needed in Tripoli",
+            "ne_date" => "3/3/2021",
         ]);
         Category::create([
-            "cat_name"=>"Frontend"
+            "cat_name" => "Frontend"
         ]);
         Category::create([
-            "cat_name" => "Backednd"
+            "cat_name" => "Backend"
         ]);
         Category::create([
             "cat_name" => "Database"
         ]);
         SystemUser::create([
-            "username"=>"lynn.h",
-            "name"=>"lynn hourieh",
-            "email"=>"lynn.h@hotmail.com",
-            "password"=>"0000",
-            "picture"=>"man.jpg",
-            "cycle_id"=>1,
-            "status_id"=>1,
-            "systemroles_id"=>1,
+            "username" => "lynn.h",
+            "name" => "lynn hourieh",
+            "email" => "lynn.h@hotmail.com",
+            "password" => "0000",
+            "picture" => "lynn.jpg",
+            "cycle_id" => 1,
+            "status_id" => 1,
+            "systemroles_id" => 1,
+        ]);
+        SystemUser::create([
+            "username" => "dark",
+            "name" => "dark don",
+            "email" => "dark.h@hotmail.com",
+            "password" => "0000",
+            "picture" => "employee-man.jpg",
+            "cycle_id" => 2,
+            "status_id" => 2,
+            "systemroles_id" => 1,
         ]);
         SystemUser::create([
             "username" => "esa",
@@ -107,17 +118,26 @@ class DatabaseSeeder extends Seeder
             "cycle_id" => 2,
             "systemroles_id" => 2,
         ]);
+        SystemUser::create([
+            "username" => "mark",
+            "name" => "Mark Frod",
+            "email" => "mark@hotmail.com",
+            "password" => "0000",
+            "picture" => "man.jpg",
+            "cycle_id" => 1,
+            "systemroles_id" => 2,
+        ]);
         Question::create([
-            "q_date"=>"4/4/2022",
-            "q_text"=>"error 500",
-            "q_image"=>"man.jpg",
-            "system_user_id"=>1,
-            "category_id"=>2,
+            "q_date" => "4/4/2022",
+            "q_text" => "error 500",
+            "q_image" => "man.jpg",
+            "system_user_id" => 1,
+            "category_id" => 2,
         ]);
         Question::create([
             "q_date" => "4/4/2022",
             "q_text" => "image error",
-            
+
             "system_user_id" => 1,
             "category_id" => 1,
         ]);
@@ -128,6 +148,11 @@ class DatabaseSeeder extends Seeder
             "system_user_id" => 1,
             "category_id" => 3,
         ]);
-
+        Answer::create([
+            "a_date" => "4/4/2022",
+            "a_text" => "my answer is here",
+            "question_id" => 1,
+            "user_id" => 1,
+        ]);
     }
 }

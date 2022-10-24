@@ -6,7 +6,9 @@ const Profile=()=>{
    const [profile, setProfile] = useState(null);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
-   const[id,setId]=useState(null)
+   const[id,setId]=useState(null);
+     const [count, setCount] = useState(null);
+     const [loadingcount, setLoadingCount] = useState(true);
  
    const FetchProfile = () => {
   const token = localStorage.getItem("token");
@@ -16,7 +18,7 @@ const Profile=()=>{
   const Role = localStorage.getItem("role");
   const ID = localStorage.getItem("id");
 
-  console.log(ID)
+  // console.log(ID)
   
 
      fetch(
@@ -42,16 +44,39 @@ const Profile=()=>{
          console.error(error.message);
          setError(error);
        });
-   };   useEffect(() => {
-     FetchProfile();
-     
-   }, []);
-    if (loading) return "loading";
-      //  let profiledetails = profile.map(function (item) {
-      //    return [item.picture,item.sysrole.sys_name,item.username,item.name,item.email,item.cycle.cy_name,item.cycle.branch.br_name];
-      //  });  
-
-    console.log(profile)
+   }; 
+      const Count = () => {
+        
+         const ID = localStorage.getItem("id");
+        fetch(
+          `${process.env.REACT_APP_Codi_URL}/api/count/${ID}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((reponse) => {
+            if (reponse.ok) {
+              return reponse.json();
+            }
+          })
+          .then((data) => {
+            setLoadingCount(false);
+            setCount(data);
+          })
+          .catch((error) => {
+            console.error(error.message);
+            setError(error);
+          });
+      };
+        useEffect(() => {
+          FetchProfile();
+          Count();
+        }, []);
+    if (loading || loadingcount)  return "loading";
+ 
     return (
       <>
         <div className="container emp-profile">
@@ -83,10 +108,12 @@ const Profile=()=>{
                 
                  
                   <p className="proile-rating">
-                    Questions : <span>8</span>
+                    Questions : <span>{count.question}</span>
                   </p>
                   <p className="proile-rating">
-                    Answers : <span>8</span>
+                    Answers : <span>{count.answer}
+
+                    </span>
                   </p>
                   <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item">

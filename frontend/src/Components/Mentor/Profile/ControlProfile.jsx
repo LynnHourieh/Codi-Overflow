@@ -10,12 +10,12 @@ const Profile = (props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [picture, setPicture] = useState(null);
- 
- 
+  const [count, setCount] = useState(null);
+  const [loadingcount, setLoadingCount] = useState(true);
 
   // const navigate = useNavigate();
   const location = useLocation();
-   console.log(location.state.id);
+  // console.log(location.state.id);
 
   const FetchProfile = () => {
     fetch(
@@ -35,23 +35,43 @@ const Profile = (props) => {
       .then((data) => {
         setLoading(false);
         setProfile(data);
-     
-        
-              
-       
       })
       .catch((error) => {
         console.error(error.message);
         setError(error);
       });
   };
+    const Count = () => {
+      fetch(
+        `${process.env.REACT_APP_Codi_URL}/api/count/${location.state.id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((reponse) => {
+          if (reponse.ok) {
+            return reponse.json();
+          }
+        })
+        .then((data) => {
+          setLoadingCount(false);
+          setCount(data);
+        })
+        .catch((error) => {
+          console.error(error.message);
+          setError(error);
+        });
+    };
   useEffect(() => {
     FetchProfile();
+    Count();
   }, []);
-  if (loading) return "loading";
-  let profiledetails = profile.map(function (item) {
+  if (loading || loadingcount) return "loading";
 
-  
+  let profiledetails = profile.map(function (item) {
     return [
       item.picture,
       item.sysrole.sys_name,
@@ -61,18 +81,15 @@ const Profile = (props) => {
       item.cycle.cy_name,
       item.cycle.branch.br_name,
       item.id,
-    
+
       item.status_id,
       item.cycle_id,
       item.systemroles_id,
-     
     ];
   });
- 
+
   return (
     <>
-
-   
       <div className="container emp-profile">
         <div className="eleven">
           <h1>
@@ -93,7 +110,6 @@ const Profile = (props) => {
                   src={`${process.env.REACT_APP_Codi_URL}/pictures/${profiledetails[0][0]}`}
                   alt=""
                 />
-               
               </div>
             </div>
             <div className="col-md-6">
@@ -110,10 +126,10 @@ const Profile = (props) => {
 
                 <h6></h6>
                 <p className="proile-rating">
-                  Questions : <span>8</span>
+                  Questions : <span>{count.question}</span>
                 </p>
                 <p className="proile-rating">
-                  Answers : <span>8</span>
+                  Answers : <span>{count.answer}</span>
                 </p>
                 <ul className="nav nav-tabs" id="myTab" role="tablist">
                   <li className="nav-item">
@@ -137,7 +153,6 @@ const Profile = (props) => {
               <EditProfile
                 profiledetails={profiledetails}
                 profile={profile}
-               
                 brnach={props.branch}
                 cycle={props.cycle}
                 sysrole={props.sysrole}

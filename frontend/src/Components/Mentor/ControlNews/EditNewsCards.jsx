@@ -172,7 +172,7 @@ function NewsCards() {
       })}
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton className="header_form">
+        <Modal.Header  className="header_form">
           <Modal.Title>
             {" "}
             <font color="#f54b9d">A</font>

@@ -33,32 +33,31 @@ function Pages() {
   const [user, setUser] = useState(null);
   const [loadinguser, setLoadinguser] = useState(true);
   const [item, setItem] = useState(null);
-  const[answer,setAnswer]=useState(null);
-  const[loadingAnswer,setLoadingAnswer]=useState(true);
+  const [answer, setAnswer] = useState(null);
+  const [loadingAnswer, setLoadingAnswer] = useState(true);
 
-    const FetchAnswer = () => {
-      fetch(`${process.env.REACT_APP_Codi_URL}/api/answer`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+  const FetchAnswer = () => {
+    fetch(`${process.env.REACT_APP_Codi_URL}/api/answer`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((reponse) => {
+        if (reponse.ok) {
+          return reponse.json();
+        }
       })
-        .then((reponse) => {
-          if (reponse.ok) {
-            return reponse.json();
-          }
-        })
-        .then((data) => {
-          setLoadingAnswer(false);
-          setAnswer(data);
-        })
-        .catch((error) => {
-          console.error(error.message);
-          setError(error);
-        });
-    };
+      .then((data) => {
+        setLoadingAnswer(false);
+        setAnswer(data);
+      })
+      .catch((error) => {
+        console.error(error.message);
+        setError(error);
+      });
+  };
 
-   
   const FetchUsers = () => {
     fetch(`${process.env.REACT_APP_Codi_URL}/api/getsysuser`, {
       method: "GET",
@@ -256,7 +255,7 @@ function Pages() {
                 setCategory={setCategory}
                 setUser={setUser}
                 answer={answer}
-setAnswer={setAnswer}
+                setAnswer={setAnswer}
               />
             }
           ></Route>

@@ -43,14 +43,14 @@ const allfilter = () => {
           );
         })}
       </Nav>
-      <AddQuestion
+      {/* <AddQuestion
         question={props.question}
         setQuestion={props.setQuestion}
         category={props.category}
         user={props.user}
         setCategory={props.setCategory}
         setUser={props.setUser}
-      />
+      /> */}
       <QuestionsAndAnswers
         question={props.question}
         setQuestion={props.setQuestion}

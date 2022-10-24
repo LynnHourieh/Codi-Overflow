@@ -8,9 +8,7 @@ function QuestionsAndAnswersHeader(props) {
 
 
   return (
-   
     <div>
-     
       <div className="eleven">
         <h1>
           <font color="#f54b9d">Q</font>
@@ -32,6 +30,14 @@ function QuestionsAndAnswersHeader(props) {
           <font color="#fbb107">s</font>
         </h1>
       </div>
+       <AddQuestion
+        question={props.question}
+        setQuestion={props.setQuestion}
+        category={props.category}
+        user={props.user}
+        setCategory={props.setCategory}
+        setUser={props.setUser}
+      />
       <QuestionCategoryHeader
         category={props.category}
         setCategory={props.setCategory}
@@ -42,8 +48,7 @@ function QuestionsAndAnswersHeader(props) {
         answer={props.answer}
         setAnswer={props.setAnswer}
       />
-  
-  
+     
     </div>
   );
 }

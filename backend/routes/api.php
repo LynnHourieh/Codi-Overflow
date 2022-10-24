@@ -10,6 +10,7 @@ use App\Http\Controllers\CycleController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\count;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SystemRoleController;
 use App\Http\Controllers\SystemUserController;
@@ -45,13 +46,24 @@ Route::get("/category",[CategoryController::class,'index']);
 //-----------------Question------------------//
 Route::get("/question", [QuestionController::class, 'index']);
 Route::POST("/addquestion", [QuestionController::class, 'store']);
+Route::PUT("/editquestion/{id}", [QuestionController::class, 'update']);
+Route::get("/checkquestion",[QuestionController::class, 'check']);
+Route::delete("/deletequestion/{id}",[QuestionController::class,"destroy"]);
 //-----------------Question------------------//
 
 
 //-----------------Answer------------------//
 Route::get("/answer", [AnswerController::class, 'index']);
+Route::POST("/addanswer",[AnswerController::class,"store"]);
+Route::PUT("/editanswer/{id}",[AnswerController::class,'update']);
+Route::delete("/deleteanswer/{id}",[AnswerController::class,'destroy']);
+
 
 //-----------------Answer------------------//
+
+//-----------------Count------------------//
+Route::get("/count/{question_id_check}", [count::class, 'index']);
+//-----------------Count------------------//
 
 //-----------------SystemRole------------------//
 Route::get("/sysrole",[SystemRoleController::class,'index']);

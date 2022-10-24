@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AnswerController extends Controller
 {
@@ -18,6 +19,7 @@ class AnswerController extends Controller
         return response()->json($answer);
     }
 
+  
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +38,22 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $answer = new Answer();
+        if ($request->hasFile('a_image')) {
+            $getImage = $request->a_image;
+            $imageName = $getImage->getClientOriginalName();
+            $imagePath = public_path() . '/pictures';
+            $getImage->move($imagePath, $imageName);
+            $answer->a_image = $imageName;
+        }
+
+        $answer->a_text = $request->a_text;
+        $answer->a_date = $request->a_date;
+        $answer->question_id= $request->question_id;
+        $answer->user_id = $request->user_id;
+
+        $answer->save();
+        return $answer;
     }
 
     /**
@@ -68,9 +85,29 @@ class AnswerController extends Controller
      * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Answer $answer)
+    public function update(Request $request, $id)
     {
-        //
+        $user = Answer::findorFail($id);
+        if ($request->a_image) {
+            $imagePath = public_path() . "/pictures/";
+            //remove old file
+            if ($user->a_image = null && $user->a_image = "") {
+                $file_old = $imagePath . $user->a_image;
+                unlink($file_old);
+            }
+            //upload new file
+            $file = $request->a_image;
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . "." . $ext;
+            $file->move($imagePath, $filename);
+            //for update in table           
+            $user->a_image = $filename;
+        }
+
+        $inputuser = $request->except(['_method', 'token', 'a_image']);
+        $user->update($inputuser);
+        // return response()->json($request->picture);
+        return $user;
     }
 
     /**
@@ -79,8 +116,10 @@ class AnswerController extends Controller
      * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Answer $answer)
+    public function destroy($id)
     {
-        //
+        $task = Answer::findOrFail($id);
+        $task->delete();
+        return "Deleted ";
     }
 }
