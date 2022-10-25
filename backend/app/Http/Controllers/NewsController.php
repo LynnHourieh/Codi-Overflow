@@ -24,12 +24,12 @@ class NewsController extends Controller
  
     public function store(Request $request)
     {
-        $new= new News();
-        $new->ne_title=$request->ne_title;
-        $new->ne_description=$request->ne_description;
-        $new->ne_date=$request->ne_date;
-        $new->save();
-        return $new;
+        // $new= new News();
+        // $new->ne_title=$request->ne_title;
+        // $new->ne_description=$request->ne_description;
+        // $new->ne_date=$request->ne_date;
+        // $new->save();
+        // return $new;
     }
 
     /**
@@ -57,19 +57,19 @@ class NewsController extends Controller
   
     public function update(Request $request, $id)
     {
-        $new=News::findorFail($id);
+        // $new=News::findorFail($id);
      
-        $inputNew = $request->except(["_method"]);
-        $new->update($inputNew);
-        return $new;
+        // $inputNew = $request->except(["_method"]);
+        // $new->update($inputNew);
+        // return $new;
         
     }
 
  
     public function destroy($id)
     {
-        $new = News::findOrFail($id);
-        $new->delete();
-      return response()->json(["News Deleted !!"]);
+    //     $new = News::findOrFail($id);
+    //     $new->delete();
+    //   return response()->json(["News Deleted !!"]);
     }
 }

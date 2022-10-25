@@ -132,8 +132,8 @@ class SystemUserController extends Controller
      * @param  \App\Models\SystemUser  $systemUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SystemUser $systemUser)
+    public function destroy($id)
     {
-        //
+        
     }
 }

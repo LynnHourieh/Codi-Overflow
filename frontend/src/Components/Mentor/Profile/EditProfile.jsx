@@ -18,6 +18,7 @@ function EditProfile(props) {
   const [picture, setPicture] = useState(null);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
 
   const EditProfiledetails = async () => {
     const formData = new FormData();
@@ -59,10 +60,10 @@ function EditProfile(props) {
     console.log(id);
     setSelectedstatus(id);
   };
-  const selectcycle=(id)=>{
+  const selectcycle = (id) => {
     console.log(id);
-    setSelectedcycle(id)
-  }
+    setSelectedcycle(id);
+  };
 
 
   return (

@@ -9,8 +9,12 @@ function AddNews() {
   const [show, setShow] = useState(false);
   const[ne_title,setne_title]=useState('');
   const[ne_description,setne_description]=useState('');
+    const [selectedUser, setselectedUser] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  var NAME=localStorage.getItem("name")
+  var ID = localStorage.getItem("id");
   var now = new Date();
   var date = now.toLocaleDateString();
   const ne_date = date;
@@ -21,6 +25,7 @@ function AddNews() {
     formData.append("ne_title", ne_title);
     formData.append("ne_description", ne_description);
     formData.append("ne_date",ne_date)
+    formData.append("user_id",ID)
     axios
       .post(`${process.env.REACT_APP_Codi_URL}/api/addnews`, formData, {
         method: "POST",
@@ -63,6 +68,18 @@ function AddNews() {
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="your name"
+                value={NAME}
+                autoFocus
+                disabled
+                className="header_form"
+                onChange={(e) => setselectedUser(ID)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type="text"
@@ -96,10 +113,18 @@ function AddNews() {
           </Form>
         </Modal.Body>
         <Modal.Footer className="header_form">
-          <Button variant="secondary" onClick={handleClose} className="close_button">
+          <Button
+            variant="secondary"
+            onClick={handleClose}
+            className="close_button"
+          >
             Close
           </Button>
-          <Button variant="primary" onClick={newAnnouncment} className="submit_button">
+          <Button
+            variant="primary"
+            onClick={newAnnouncment}
+            className="submit_button"
+          >
             Post Announcment
           </Button>
         </Modal.Footer>

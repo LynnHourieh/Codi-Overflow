@@ -13,6 +13,10 @@ class SystemUser extends Model
 {
     use HasFactory;
     protected $fillable = ["name", "username", "password","email","systemroles_id","status_id","cycle_id"];
+    public function announcment()
+    {
+        return $this->hasMany(Announcment::class);
+    }
     public function questions()
     {
         return $this->hasMany(Question::class);

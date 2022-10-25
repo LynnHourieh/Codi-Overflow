@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import EditProfile from "./EditProfile";
 import "./Profile.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 import ControlStickyNav from "../../Layout/ControlStickyNav";
+
 const Profile = (props) => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -12,6 +14,8 @@ const Profile = (props) => {
   const [picture, setPicture] = useState(null);
   const [count, setCount] = useState(null);
   const [loadingcount, setLoadingCount] = useState(true);
+const [data, setData] = useState(null);
+
 
   // const navigate = useNavigate();
   const location = useLocation();
@@ -65,6 +69,10 @@ const Profile = (props) => {
           setError(error);
         });
     };
+  
+
+
+
   useEffect(() => {
     FetchProfile();
     Count();
@@ -87,6 +95,7 @@ const Profile = (props) => {
       item.systemroles_id,
     ];
   });
+     
 
   return (
     <>
@@ -150,6 +159,8 @@ const Profile = (props) => {
               </div>
             </div>
             <div className="col-md-2">
+          
+
               <EditProfile
                 profiledetails={profiledetails}
                 profile={profile}
@@ -163,7 +174,7 @@ const Profile = (props) => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-4"></div>
+            <div className="col-md-4"> </div>
             <div className="col-md-8">
               <div className="tab-content profile-tab" id="myTabContent">
                 <div
@@ -219,6 +230,7 @@ const Profile = (props) => {
           </div>
         </form>
       </div>
+   
     </>
   );
 };

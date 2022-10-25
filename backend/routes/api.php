@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncmentController;
 use App\Http\Controllers\AnswerController;
 use App\Models\SystemUser;
 use Illuminate\Http\Request;
@@ -33,10 +34,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //-----------------News------------------//
 //----get-----add----update----delete----//
-Route::get('/news', [NewsController::class, 'index']);
-Route::post('/addnews', [NewsController::class, 'store']);
-Route::put('/updatenews/{id}', [NewsController::class, 'update']);
-Route::delete('/deletenews/{id}', [NewsController::class, 'destroy']);
+Route::get('/news', [AnnouncmentController::class, 'index']);
+Route::post('/addnews', [AnnouncmentController::class, 'store']);
+Route::put('/updatenews/{id}', [AnnouncmentController::class, 'update']);
+Route::delete('/deletenews/{id}', [AnnouncmentController::class, 'destroy']);
 //-----------------News------------------//
 
 //-----------------Category------------------//
@@ -87,6 +88,7 @@ Route::PUT("/updatesysuser/{id}", [SystemUserController::class, 'update']);
 Route::get("/sysuser/{id}", [SystemUserController::class, 'getuserbyid']);
 Route::get("/sysfilter",[SystemUserController::class, 'getfilter']);
 Route::get("/search/{id}", [SystemUserController::class, 'search']);
+
 //-----------------System_user------------------//
 
 //-----------------Cycle------------------//

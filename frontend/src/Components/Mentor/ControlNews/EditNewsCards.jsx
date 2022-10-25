@@ -41,6 +41,7 @@ function NewsCards() {
     const [ne_title, setne_title] = useState("");
     const [ne_description, setne_description] = useState("");
      
+ const ID=localStorage.getItem("id")
  
   //Fetching News
   const FetchNews = () => {
@@ -90,6 +91,7 @@ function NewsCards() {
        setData(data);
      });
  };
+
  //Edit News
   const EditNews = async () => {
     const formData = new FormData();
@@ -130,7 +132,7 @@ function NewsCards() {
             key={item.id}
           >
             <Card.Header style={{ borderColor: "#2e489e" }}>
-              <Dropdown>
+              {item.user_id == ID ?( <Dropdown>
                 <Dropdown.Toggle as={CustomToggle}></Dropdown.Toggle>
                 <Dropdown.Menu size="sm" title="">
                   <Dropdown.Header
@@ -155,7 +157,8 @@ function NewsCards() {
                     <DeleteIcon />
                   </Dropdown.Header>
                 </Dropdown.Menu>
-              </Dropdown>
+              </Dropdown>):("")}
+             
 
               <Card.Title className="news_title" style={{ color: "#2e489e" }}>
                 {" "}
@@ -166,6 +169,7 @@ function NewsCards() {
               <Card.Title className="news_date"> {item.ne_date} </Card.Title>
               <br></br>
               <Card.Text>{item.ne_description}</Card.Text>
+              <Card.Text className="news_date">{item.user.name}</Card.Text>
             </Card.Body>
           </Card>
         );
