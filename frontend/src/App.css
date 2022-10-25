@@ -15,9 +15,23 @@ text-align: center;}
  box-shadow: #2e489e
  
  0px 3px 8px;
+ margin-left: 80%;
 
 
 }
+
+
+@media screen and (max-width: 880px) {
+ .items{
+ 
+  margin:10px;
+
+ box-shadow: #2e489e
+ 
+ 0px 3px 8px;
+
+
+}}
 .form{
 display: flex;
 float: right;
@@ -115,7 +129,14 @@ font-size: 20px;}
   float: right;
   font-size: 20px;
 }
-
+.avatar{
+border:2px solid #f54b9d;
+cursor: pointer;
+}
+.avatar_answer{
+border:2px solid #fbb107;
+cursor: pointer;
+}
 /*------------------Student List-------------*/
 
 
