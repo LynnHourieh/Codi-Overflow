@@ -38,6 +38,8 @@ Route::get('/news', [AnnouncmentController::class, 'index']);
 Route::post('/addnews', [AnnouncmentController::class, 'store']);
 Route::put('/updatenews/{id}', [AnnouncmentController::class, 'update']);
 Route::delete('/deletenews/{id}', [AnnouncmentController::class, 'destroy']);
+Route::get("/latestnews", [AnnouncmentController::class, "latest"]);
+
 //-----------------News------------------//
 
 //-----------------Category------------------//
@@ -50,6 +52,7 @@ Route::POST("/addquestion", [QuestionController::class, 'store']);
 Route::PUT("/editquestion/{id}", [QuestionController::class, 'update']);
 Route::get("/checkquestion",[QuestionController::class, 'check']);
 Route::delete("/deletequestion/{id}",[QuestionController::class,"destroy"]);
+Route::get("/latestquestion",[QuestionController::class,"latest"]);
 //-----------------Question------------------//
 
 
@@ -58,6 +61,7 @@ Route::get("/answer", [AnswerController::class, 'index']);
 Route::POST("/addanswer",[AnswerController::class,"store"]);
 Route::PUT("/editanswer/{id}",[AnswerController::class,'update']);
 Route::delete("/deleteanswer/{id}",[AnswerController::class,'destroy']);
+
 
 
 //-----------------Answer------------------//

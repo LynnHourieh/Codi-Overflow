@@ -12,8 +12,8 @@ const Profile = (props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [picture, setPicture] = useState(null);
-  const [count, setCount] = useState(null);
-  const [loadingcount, setLoadingCount] = useState(true);
+
+
 const [data, setData] = useState(null);
 
 
@@ -45,39 +45,16 @@ const [data, setData] = useState(null);
         setError(error);
       });
   };
-    const Count = () => {
-      fetch(
-        `${process.env.REACT_APP_Codi_URL}/api/count/${location.state.id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((reponse) => {
-          if (reponse.ok) {
-            return reponse.json();
-          }
-        })
-        .then((data) => {
-          setLoadingCount(false);
-          setCount(data);
-        })
-        .catch((error) => {
-          console.error(error.message);
-          setError(error);
-        });
-    };
   
-
+  
+ const ID = localStorage.getItem("id");
 
 
   useEffect(() => {
     FetchProfile();
-    Count();
+ 
   }, []);
-  if (loading || loadingcount) return "loading";
+  if (loading) return "loading";
 
   let profiledetails = profile.map(function (item) {
     return [
@@ -95,7 +72,7 @@ const [data, setData] = useState(null);
       item.systemroles_id,
     ];
   });
-     
+    
 
   return (
     <>
@@ -135,10 +112,10 @@ const [data, setData] = useState(null);
 
                 <h6></h6>
                 <p className="proile-rating">
-                  Questions : <span>{count.question}</span>
+                  Questions : <span>{props.count.question}</span>
                 </p>
                 <p className="proile-rating">
-                  Answers : <span>{count.answer}</span>
+                  Answers : <span>{props.count.answer}</span>
                 </p>
                 <ul className="nav nav-tabs" id="myTab" role="tablist">
                   <li className="nav-item">
@@ -159,18 +136,20 @@ const [data, setData] = useState(null);
               </div>
             </div>
             <div className="col-md-2">
-          
-
-              <EditProfile
-                profiledetails={profiledetails}
-                profile={profile}
-                brnach={props.branch}
-                cycle={props.cycle}
-                sysrole={props.sysrole}
-                status={props.status}
-                setStatus={props.setStatus}
-                sysroles={props.sysroles}
-              />
+              {profile[0].id == ID || profile[0].sysrole.sys_name =="Student"? (
+                <EditProfile
+         
+                  profile={profile}
+               
+                  cycle={props.cycle}
+                 
+                  status={props.status}
+                
+                  sysroles={props.sysroles}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className="row">
@@ -230,7 +209,6 @@ const [data, setData] = useState(null);
           </div>
         </form>
       </div>
-   
     </>
   );
 };

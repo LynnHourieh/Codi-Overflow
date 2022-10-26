@@ -16,9 +16,13 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        // $question = Question::with("category", "systemUser.sysrole")->orderBy('q_date', 'desc')->get();
-        // return response()->json($question);
-        $question = Question::orderBy("q_date", "ASC")->with("category", "systemUser.sysrole")->get();
+        $question = Question::with("category", "systemUser.sysrole")->orderBy('id', 'desc')->get();
+        return response()->json($question);
+   
+    }
+    public function latest()
+    {
+        $question = Question::with("category", "systemUser.sysrole")->orderBy('id', 'desc')->limit(1)->get();
         return response()->json($question);
     }
 

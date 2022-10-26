@@ -4,12 +4,12 @@ import News from "./Student/News/News";
 import QuestionsAndAnswersHeader from "./Mentor/Question&Answers/QuestionsAndAnswersHeader";
 import Profile from "./Student/Profile/Profile";
 import Home from "./Home/Home";
-import Footer from "./Layout/Footer";
+
 import ControlNews from "./Mentor/ControlNews/ControlNews";
 import ControlProfile from "./Mentor/Profile/ControlProfile";
 import StudentList from "./Mentor/List/StudentList";
 import ListHeader from "./Mentor/List/ListHeader";
-import { alignPropType } from "react-bootstrap/esm/types";
+import QuestionsAndAnswersHeaderStudent from "./Student/Question&AnswersStudents/QuestionsAndAnswersHeaderStudent";
 import Login from "./Login/Login";
 import StickyNav from "./Layout/StickyNav";
 import ControlStickyNav from "./Layout/ControlStickyNav";
@@ -35,6 +35,34 @@ function Pages() {
   const [item, setItem] = useState(null);
   const [answer, setAnswer] = useState(null);
   const [loadingAnswer, setLoadingAnswer] = useState(true);
+  const [latestquestion, setLatestquestion] = useState("");
+  const [loadinglatestquestion, setloadinglatestquestion] = useState(true);
+  const [latestnews, setLatestnews] = useState("");
+  const [loadinglatestnews, setloadinglatestnews] = useState(true);
+  const[count,setCount]=useState("");
+  const[loadingcount,setLoadingCount]=useState(true)
+  const Count = () => {
+    const ID = localStorage.getItem("id");
+    fetch(`${process.env.REACT_APP_Codi_URL}/api/count/${ID}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((reponse) => {
+        if (reponse.ok) {
+          return reponse.json();
+        }
+      })
+      .then((data) => {
+        setLoadingCount(false);
+        setCount(data);
+      })
+      .catch((error) => {
+        console.error(error.message);
+        setError(error);
+      });
+  };
 
   const FetchAnswer = () => {
     fetch(`${process.env.REACT_APP_Codi_URL}/api/answer`, {
@@ -207,6 +235,48 @@ function Pages() {
         setError(error);
       });
   };
+  const FetchLatestQuestion = () => {
+    fetch(`${process.env.REACT_APP_Codi_URL}/api/latestquestion`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((reponse) => {
+        if (reponse.ok) {
+          return reponse.json();
+        }
+      })
+      .then((data) => {
+        setloadinglatestquestion(false);
+        setLatestquestion(data);
+      })
+      .catch((error) => {
+        console.error(error.message);
+        setError(error);
+      });
+  };
+  const FetchLatestNews = () => {
+    fetch(`${process.env.REACT_APP_Codi_URL}/api/latestquestion`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((reponse) => {
+        if (reponse.ok) {
+          return reponse.json();
+        }
+      })
+      .then((data) => {
+        setloadinglatestnews(false);
+        setLatestnews(data);
+      })
+      .catch((error) => {
+        console.error(error.message);
+        setError(error);
+      });
+  };
 
   useEffect(() => {
     FetchCycles();
@@ -217,6 +287,9 @@ function Pages() {
     FetchQuestions();
     FetchUsers();
     FetchAnswer();
+    FetchLatestQuestion();
+    FetchLatestNews();
+    Count()
   }, []);
 
   // console.log(cycle);
@@ -233,17 +306,31 @@ function Pages() {
     loadingCategory ||
     loadingQuestion ||
     loadinguser ||
-    loadingAnswer
+    loadingAnswer ||
+    loadinglatestnews ||
+    loadinglatestquestion||
+    loadingcount
   )
     return "loading";
+    console.log(count)
   return (
     <Router>
       <Routes>
         <Route path="/home" element={<StickyNav />}>
-          <Route index element={<Home />}></Route>
+          <Route
+            index
+            element={
+              <Home
+                latestquestion={latestquestion}
+                answer={answer}
+                category={category}
+                question={question}
+              />
+            }
+          ></Route>
         </Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/questions" element={<ControlStickyNav />}>
+        <Route path="/controlquestions" element={<ControlStickyNav />}>
           <Route
             index
             element={
@@ -264,16 +351,50 @@ function Pages() {
           <Route index element={<News />}></Route>
         </Route>
         <Route path="/profile" element={<StickyNav />}>
-          <Route index element={<Profile />}></Route>
+          <Route
+            index
+            element={
+              <Profile
+               
+                count={count}
+                sysroles={sysroles}
+                cycle={cycle}
+                status={status}
+              />
+            }
+          ></Route>
         </Route>
 
-        {/* <Route
-          path="/questions"
-          element={<QuestionsAndAnswersHeader />}
-        ></Route> */}
+        <Route path="/questions" element={<StickyNav />}>
+          <Route
+            index
+            element={
+              <QuestionsAndAnswersHeaderStudent
+                question={question}
+                setQuestion={setQuestion}
+                category={category}
+                user={user}
+                setCategory={setCategory}
+                setUser={setUser}
+                answer={answer}
+                setAnswer={setAnswer}
+              />
+            }
+          ></Route>
+        </Route>
 
         <Route path="/yourprofile" element={<ControlStickyNav />}>
-          <Route index element={<YourProfile />}></Route>
+          <Route
+            index
+            element={
+              <YourProfile
+                sysroles={sysroles}
+                cycle={cycle}
+                status={status}
+                count={count}
+              />
+            }
+          ></Route>
         </Route>
 
         <Route path="/controlnews" element={<ControlStickyNav />}>
@@ -294,6 +415,7 @@ function Pages() {
                 branch={branch}
                 setBranch={setBranch}
                 category={setCategory}
+                count={count}
               />
             }
           ></Route>

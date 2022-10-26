@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from "react";
 import StickyNav from "../../Layout/StickyNav";
 import { useNavigate, useLocation } from "react-router-dom";
+import EditProfile from "../../Mentor/Profile/EditProfile";
 
-const Profile=()=>{
+const Profile=(props)=>{
    const [profile, setProfile] = useState(null);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
@@ -47,9 +48,7 @@ const Profile=()=>{
      
    }, []);
     if (loading) return "loading";
-      //  let profiledetails = profile.map(function (item) {
-      //    return [item.picture,item.sysrole.sys_name,item.username,item.name,item.email,item.cycle.cy_name,item.cycle.branch.br_name];
-      //  });  
+     
 
     console.log(profile)
     return (
@@ -80,13 +79,12 @@ const Profile=()=>{
               <div className="col-md-6">
                 <div className="profile-head">
                   <h5>{profile[0].name}</h5>
-                
-                 
+
                   <p className="proile-rating">
-                    Questions : <span>8</span>
+                    Questions : <span>{props.count.question}</span>
                   </p>
                   <p className="proile-rating">
-                    Answers : <span>8</span>
+                    Answers : <span>{props.count.answer}</span>
                   </p>
                   <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item">
@@ -106,7 +104,15 @@ const Profile=()=>{
                   </ul>
                 </div>
               </div>
-              <div className="col-md-2"></div>
+              <div className="col-md-2">
+                {" "}
+                <EditProfile
+                  profile={profile}
+                  cycle={props.cycle}
+                  status={props.status}
+                  sysroles={props.sysroles}
+                />
+              </div>
             </div>
             <div className="row">
               <div className="col-md-4"></div>

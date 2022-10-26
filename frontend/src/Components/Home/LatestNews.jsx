@@ -9,7 +9,7 @@ import axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function NewsCards() {
+function LatestNews() {
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
       href=""
@@ -35,17 +35,17 @@ function NewsCards() {
   const [news, setNews] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-   const [id, setId] = useState("");
-   const[data,setData]=useState(null);
-   const [errorMessage, setErrorMessage] = useState("");
-    const [ne_title, setne_title] = useState("");
-    const [ne_description, setne_description] = useState("");
-     
- const ID=localStorage.getItem("id")
- 
+  const [id, setId] = useState("");
+  const [data, setData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [ne_title, setne_title] = useState("");
+  const [ne_description, setne_description] = useState("");
+
+  const ID = localStorage.getItem("id");
+
   //Fetching News
   const FetchNews = () => {
-    fetch(`${process.env.REACT_APP_Codi_URL}/api/news`, {
+    fetch(`${process.env.REACT_APP_Codi_URL}/api/latestnews`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,6 @@ function NewsCards() {
     })
       .then((reponse) => {
         if (reponse.ok) {
-         
           return reponse.json();
         }
       })
@@ -66,38 +65,36 @@ function NewsCards() {
         setError(error);
       });
   };
-//Delete News
- const DeleteNews = async () => {
+  //Delete News
+  const DeleteNews = async () => {
+    await fetch(`${process.env.REACT_APP_Codi_URL}/api/deletenews/${id}`, {
+      method: "DELETE",
 
-   await fetch( `${process.env.REACT_APP_Codi_URL}/api/deletenews/${id}`, {
-    
-     method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        window.location.reload();
 
-     headers: {
-       "Content-Type": "application/json",
-     },
-   })
-     .then((response) => {
-       window.location.reload();
+        if (response.ok) {
+          return response.json();
+        }
 
-       if (response.ok) {
-         return response.json();
-       }
+        throw response;
+      })
 
-       throw response;
-     })
+      .then((data) => {
+        setData(data);
+      });
+  };
 
-     .then((data) => {
-       setData(data);
-     });
- };
-
- //Edit News
+  //Edit News
   const EditNews = async () => {
     const formData = new FormData();
     formData.append("ne_title", ne_title);
     formData.append("ne_description", ne_description);
-   
+
     formData.append("_method", "PUT");
     await axios
       .post(
@@ -110,8 +107,6 @@ function NewsCards() {
       .then((res) => {
         window.location.reload();
         setLoading(false);
-      
-        
       })
 
       .catch((error) => {
@@ -123,6 +118,28 @@ function NewsCards() {
   }, []);
   if (loading) return "loading";
   return (
+         <>
+      <div className="eleven">
+        <h1>
+          <font color="#f54b9d">C</font>
+          <font color="#fbb107">O</font>
+          <font color="#2e489e">D</font>
+          <font color="#f54b9d">I'</font>
+          <font color="#fbb107">S </font>
+          <font color="#2e489e"> A</font>
+          <font color="#f54b9d">N</font>
+          <font color="#fbb107">N</font>
+          <font color="#2e489e">O</font>
+          <font color="#f54b9d">U</font>
+          <font color="#fbb107">N</font>
+          <font color="#2e489e">C</font>
+          <font color="#f54b9d">M</font>
+          <font color="#fbb107">E</font>
+          <font color="#2e489e">N</font>
+          <font color="#f54b9d">T</font>
+          
+        </h1>
+      </div>
     <div className="news_cards">
       {news.map((item) => {
         return (
@@ -132,33 +149,36 @@ function NewsCards() {
             key={item.id}
           >
             <Card.Header style={{ borderColor: "#2e489e" }}>
-              {item.user_id == ID ?( <Dropdown>
-                <Dropdown.Toggle as={CustomToggle}></Dropdown.Toggle>
-                <Dropdown.Menu size="sm" title="">
-                  <Dropdown.Header
-                    style={{ cursor: "pointer", color: "#f54b9d" }}
-                    onClick={() => {
-                      EdithandleShow();
-                      setId(item.id);
-                      setne_title(item.ne_title);
-                      setne_description(item.ne_description);
-                    }}
-                  >
-                    <EditIcon />
-                  </Dropdown.Header>
-                  <Dropdown.Divider />
-                  <Dropdown.Header
-                    style={{ cursor: "pointer", color: "#f54b9d" }}
-                    onClick={() => {
-                      handleShow();
-                      setId(item.id);
-                    }}
-                  >
-                    <DeleteIcon />
-                  </Dropdown.Header>
-                </Dropdown.Menu>
-              </Dropdown>):("")}
-             
+              {item.user_id == ID ? (
+                <Dropdown>
+                  <Dropdown.Toggle as={CustomToggle}></Dropdown.Toggle>
+                  <Dropdown.Menu size="sm" title="">
+                    <Dropdown.Header
+                      style={{ cursor: "pointer", color: "#f54b9d" }}
+                      onClick={() => {
+                        EdithandleShow();
+                        setId(item.id);
+                        setne_title(item.ne_title);
+                        setne_description(item.ne_description);
+                      }}
+                    >
+                      <EditIcon />
+                    </Dropdown.Header>
+                    <Dropdown.Divider />
+                    <Dropdown.Header
+                      style={{ cursor: "pointer", color: "#f54b9d" }}
+                      onClick={() => {
+                        handleShow();
+                        setId(item.id);
+                      }}
+                    >
+                      <DeleteIcon />
+                    </Dropdown.Header>
+                  </Dropdown.Menu>
+                </Dropdown>
+              ) : (
+                ""
+              )}
 
               <Card.Title className="news_title" style={{ color: "#2e489e" }}>
                 {" "}
@@ -176,7 +196,7 @@ function NewsCards() {
       })}
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header  className="header_form">
+        <Modal.Header className="header_form">
           <Modal.Title>
             {" "}
             <font color="#f54b9d">A</font>
@@ -185,7 +205,6 @@ function NewsCards() {
             <font color="#f54b9d">R</font>
             <font color="#fbb107">T</font>
             <font color="#2e489e"> !</font>
-          
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -287,8 +306,8 @@ function NewsCards() {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </div></>
   );
 }
 
-export default NewsCards;
+export default LatestNews;

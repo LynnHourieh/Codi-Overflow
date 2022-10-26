@@ -1,5 +1,3 @@
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
@@ -30,7 +28,7 @@ function ControlStickyNav() {
               <Nav.Link href="/yourprofile" className="navbar_color">
                 Profile
               </Nav.Link>
-              <Nav.Link href="/questions" className="navbar_color">
+              <Nav.Link href="/controlquestions" className="navbar_color">
                 All Questions
               </Nav.Link>
 

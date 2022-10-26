@@ -12,8 +12,9 @@ function CardsExample() {
         <Card.Body>
           <Card.Title>Questions</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            Answering and asking questions is an important part of learning. We
+            ask questions in order to learn more information about something,
+            and we answer questions to provide more information.
           </Card.Text>
           <Button
             style={{ backgroundColor: "#f54b9d", borderColor: "#f54b9d" }}
@@ -29,8 +30,9 @@ function CardsExample() {
         <Card.Body>
           <Card.Title>News & Announcment</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            You can use Announcements to welcome students to the course at the
+            beginning of the term, let them know of any important deadlines or
+            materials that have been added to the course.
           </Card.Text>
           <Button
             style={{ backgroundColor: "#fbb107", borderColor: "#fbb107" }}
@@ -46,8 +48,9 @@ function CardsExample() {
         <Card.Body>
           <Card.Title>Resources</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            Various interactive resources like examples, assignments, videos,
+            applications, projects and more help the user to learn and
+            understand the programming language more effectively
           </Card.Text>
           <Button
             style={{ backgroundColor: "#2e489e", borderColor: "#2e489e" }}

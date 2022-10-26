@@ -4,16 +4,23 @@ import News from '../Student/News/News';
 
 import CarouselFade from "./CarouselFade";
 import CardsExample from "./CardsExample"
-import StickyNav from '../Layout/StickyNav';
 
-function Home() {
+import LatestQuestion from './LatestQuestion';
+import LatestNews from './LatestNews';
+
+function Home(props) {
+
   return (
     <div>
-    
       <CarouselFade />
-      <CardsExample/>
-  
-      <News />
+      <CardsExample />
+      <LatestQuestion
+        answer={props.answer}
+        latestquestion={props.latestquestion}
+        question={props.question}
+        category={props.category}
+      />
+      <LatestNews/>
     </div>
   );
 }

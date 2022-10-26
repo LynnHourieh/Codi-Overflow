@@ -15,10 +15,14 @@ class AnnouncmentController extends Controller
      */
     public function index()
     {
-        $new = Announcment::with("user")->get();
+        $new = Announcment::with("user")->orderBy('id', 'desc')->get();
         return response()->json($new);
     }
-
+    public function latest()
+    {
+        $new = Announcment::with("user")->orderBy('id', 'desc')->limit(4)->get();
+        return response()->json($new);
+    }
     /**
      * Show the form for creating a new resource.
      *

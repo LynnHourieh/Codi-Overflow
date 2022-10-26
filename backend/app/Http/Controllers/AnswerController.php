@@ -15,10 +15,10 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        $answer = Answer::with('system_user',"question")->get();
+        $answer = Answer::with('system_user',"question")->orderBy('id', 'desc')->get();
         return response()->json($answer);
     }
-
+   
   
     /**
      * Show the form for creating a new resource.

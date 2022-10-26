@@ -1,82 +1,115 @@
-.test{display: flex;
-justify-content: space-between;}
-
-.cards{display: flex;
-justify-content: space-between;
-padding:80px}
-.title{font-family: Sofia;
-
-text-align: center;}
-
-.items{
- 
-  margin:10px;
-
- box-shadow: #2e489e
- 
- 0px 3px 8px;
- margin-left: 80%;
-
-
+.test {
+  display: flex;
+  justify-content: space-between;
 }
 
+.cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 80px;
+}
+.title {
+  font-family: Sofia;
+
+  text-align: center;
+}
+
+.items {
+  margin: 10px;
+
+  box-shadow: #2e489e 0px 3px 8px;
+  margin-left: 80%;
+}
+.latest_items {
+  margin: 10px;
+
+  box-shadow: #2e489e 0px 3px 8px;
+  margin-left: 20%;
+}
+.pictures {
+  filter: blur(2px);
+}
 
 @media screen and (max-width: 880px) {
- .items{
- 
-  margin:10px;
+  .items {
+    margin: 10px;
+
+    box-shadow: #2e489e 0px 3px 8px;
+  }
+  .latest_items{  margin:10px;
 
  box-shadow: #2e489e
  
  0px 3px 8px;
+ margin-left: 0%;
+ margin-right: 30%;
+ }
+}
+.form {
+  display: flex;
+  float: right;
+  background-color: #f54b9d;
+  border-color: #f54b9d;
+}
 
-
-}}
-.form{
-display: flex;
-float: right;
-background-color: #f54b9d;
-border-color:#f54b9d;}
-
-
-.grid_news{
+.grid_news {
   display: flex;
   flex-wrap: wrap;
-
 }
- .dropdown_list{float: right;}
+.dropdown_list {
+  float: right;
+}
 /* ----------------News----------- */
-.news_cards{display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
-margin:20px}
+.news_cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px;
+}
 h1:before,
 h1:after {
   background-color: #c50000;
 }
 
 .eleven h1 {
-  font-size:30px;text-align:center; line-height:1.5em; padding-bottom:45px; font-family:"Playfair Display", serif; text-transform:uppercase;letter-spacing: 2px; color:#111;
+  font-size: 30px;
+  text-align: center;
+  line-height: 1.5em;
+  padding-bottom: 45px;
+  font-family: "Playfair Display", serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #111;
 }
-
 
 .eleven h1:before {
   position: absolute;
   left: 0;
   bottom: 20px;
   width: 60%;
-  left:50%; margin-left:-30%;
+  left: 50%;
+  margin-left: -30%;
   height: 1px;
   content: "";
-  background-color: #fbb107; z-index: 4;
+  background-color: #fbb107;
+  z-index: 4;
 }
 .eleven h1:after {
-  position:absolute;
-  width:40px; height:40px; left:50%; margin-left:-20px; bottom:0px;
-  content: '\00a7'; font-size:30px; line-height:40px; color:#f54b9d;
-  font-weight:400; z-index: 5;
-  display:block;
-  background-color:#f8f8f8;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 50%;
+  margin-left: -20px;
+  bottom: 0px;
+  content: "\00a7";
+  font-size: 30px;
+  line-height: 40px;
+  color: #f54b9d;
+  font-weight: 400;
+  z-index: 5;
+  display: block;
+  background-color: #f8f8f8;
 }
 
 h1 {
@@ -91,77 +124,85 @@ h1 {
   -o-transition: all 0.4s ease 0s;
   transition: all 0.4s ease 0s;
 }
-.add_news{color:#f54b9d;
-float: right;}
-.news_options{color:#fbb107;
-float: right;}
-.news_title{text-align: center;
+.add_news {
+  color: #f54b9d;
+  float: right;
+}
+.news_options {
+  color: #fbb107;
+  float: right;
+}
+.news_title {
+  text-align: center;
   font-weight: lighter;
   font-size: 22px;
 }
-.news_date{float:right;
-font-size: 12px;}
+.news_date {
+  float: right;
+  font-size: 12px;
+}
 /* ----------------News----------- */
 /* ----------------Pagination----------- */
 
 /* ----------------Pagination----------- */
 
-.more_options{
-float: right;
-cursor: pointer;
+.more_options {
+  float: right;
+  cursor: pointer;
 }
-th{font-weight:500;
-color:#2e489e}
+th {
+  font-weight: 500;
+  color: #2e489e;
+}
 
 /*------------------Student List-------------*/
-.list_images{
-  width:40px;
+.list_images {
+  width: 40px;
   border-radius: 50%;
-  height:40px
+  height: 40px;
 }
-.filter_button{color:#c50000;
-font-weight: 500;
-font-size: 20px;}
+.filter_button {
+  color: #c50000;
+  font-weight: 500;
+  font-size: 20px;
+}
 
-.add_participants{
-  color:#f54b9d;
+.add_participants {
+  color: #f54b9d;
   cursor: pointer;
   float: right;
   font-size: 20px;
 }
-.avatar{
-border:2px solid #f54b9d;
-cursor: pointer;
+.avatar {
+  border: 2px solid #f54b9d;
+  cursor: pointer;
 }
-.avatar_answer{
-border:2px solid #fbb107;
-cursor: pointer;
+.avatar_answer {
+  border: 2px solid #fbb107;
+  cursor: pointer;
 }
 /*------------------Student List-------------*/
 
-
 /*--------------------form----------------------*/
-.close_button{
+.close_button {
   background-color: #fbb107;
   border-color: #fbb107;
 }
-.submit_button{
+.submit_button {
   background-color: #2e489e;
   border-color: #2e489e;
 }
-.header_form{
+.header_form {
   border-color: #f54b9d;
- 
-  
 }
-.note{
-  color:#2e489e
+.note {
+  color: #2e489e;
 }
 /*--------------------form----------------------*/
 
-.navbar_color{
-  color:#f54b9d
+.navbar_color {
+  color: #f54b9d;
 }
-.navbar_color:hover{
-  color:#2e489e
+.navbar_color:hover {
+  color: #2e489e;
 }
