@@ -61,6 +61,7 @@ class SystemUserController extends Controller
         $sys_user->name = $request->name;
         $sys_user->username = $request->username;
         $sys_user->email = $request->email;
+        $sys_user->password = $request->password;
         $sys_user->systemroles_id = $request->systemroles_id;
         $sys_user->status_id = $request->status_id;
         $sys_user->cycle_id = $request->cycle_id;

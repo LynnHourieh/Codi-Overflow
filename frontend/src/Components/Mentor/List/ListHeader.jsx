@@ -21,6 +21,7 @@ function ListHeader(props) {
   const [name, setname] = useState("");
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
+  const[password,setpassword]=useState(null)
 
   // const handleShow = () => setShow(true);
 
@@ -31,10 +32,12 @@ function ListHeader(props) {
     formData.append("name", name);
     formData.append("username", username);
     formData.append("email", email);
+    formData.append("password",password);
     formData.append("cycle_id", selectedCycle);
     formData.append("status_id", Selectedstatus);
     formData.append("systemroles_id", selectedsystemroles);
      formData.append("picture", image);
+     
     axios
       .post(`${process.env.REACT_APP_Codi_URL}/api/addsysuser`, formData, {
         method: "POST",
@@ -119,18 +122,29 @@ function ListHeader(props) {
                 className="header_form"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="your full name"
+                placeholder="full name"
                 value={name}
                 onChange={(e) => setname(e.target.value)}
                 autoFocus
                 className="header_form"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput0">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="password"
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
+                autoFocus
+                className="header_form"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
@@ -142,7 +156,7 @@ function ListHeader(props) {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
               <Form.Label>Role</Form.Label>
               <Form.Select
                 onClick={(e) => selectrole(e.target.value)}
@@ -200,7 +214,7 @@ function ListHeader(props) {
             />
 
             <br></br>
-            <Form.Text className="note" >
+            <Form.Text className="note">
               you can add image to make your question clear
             </Form.Text>
           </Form>
