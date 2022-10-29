@@ -8,6 +8,7 @@ use App\Models\Answer;
 use App\Models\Branch;
 use App\Models\Category;
 use App\Models\Cycle;
+use App\Models\Level;
 use App\Models\News;
 use App\Models\Question;
 use App\Models\Status;
@@ -154,5 +155,6 @@ class DatabaseSeeder extends Seeder
             "question_id" => 1,
             "user_id" => 1,
         ]);
+      
     }
 }

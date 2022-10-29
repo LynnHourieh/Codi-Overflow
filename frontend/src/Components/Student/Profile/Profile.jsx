@@ -115,7 +115,20 @@ const Profile=(props)=>{
               </div>
             </div>
             <div className="row">
-              <div className="col-md-4"></div>
+              <div className="col-md-4">
+                <div className="bio">
+                  {" "}
+                  {profile[0].biography != null ? (
+                    <>
+                      <label className="bio">Biography:</label>
+                      <br></br>
+                      <div className="bio_info">"{profile[0].biography}"</div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
               <div className="col-md-8">
                 <div className="tab-content profile-tab" id="myTabContent">
                   <div
@@ -164,6 +177,14 @@ const Profile=(props)=>{
                         <p>{profile[0].cycle.cy_name}</p>
                       </div>
                     </div>
+                    {profile[0].levels != null ? (<div className="row">
+                      <div className="col-md-6">
+                        <label>Level</label>
+                      </div><div className="col-md-6">
+                        <p>{profile[0].levels}</p>
+                      </div>
+                    </div>):("")}
+                      
                   </div>
                 </div>
               </div>

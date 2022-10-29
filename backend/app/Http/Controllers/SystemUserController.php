@@ -65,6 +65,8 @@ class SystemUserController extends Controller
         $sys_user->systemroles_id = $request->systemroles_id;
         $sys_user->status_id = $request->status_id;
         $sys_user->cycle_id = $request->cycle_id;
+        $sys_user->biography=$request->biography;
+        $sys_user->levels=$request->levels;
         $sys_user->save();
         return $sys_user;
     }

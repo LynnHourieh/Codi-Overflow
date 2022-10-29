@@ -21,7 +21,9 @@ function ListHeader(props) {
   const [name, setname] = useState("");
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
-  const[password,setpassword]=useState(null)
+  const [password, setpassword] = useState(null);
+  const [levels, setLevels] = useState("");
+  const [biography, setBio] = useState("");
 
   // const handleShow = () => setShow(true);
 
@@ -32,12 +34,14 @@ function ListHeader(props) {
     formData.append("name", name);
     formData.append("username", username);
     formData.append("email", email);
-    formData.append("password",password);
+    formData.append("password", password);
     formData.append("cycle_id", selectedCycle);
     formData.append("status_id", Selectedstatus);
     formData.append("systemroles_id", selectedsystemroles);
-     formData.append("picture", image);
-     
+    formData.append("levels", levels);
+    formData.append("picture", image);
+    formData.append("biography", biography);
+
     axios
       .post(`${process.env.REACT_APP_Codi_URL}/api/addsysuser`, formData, {
         method: "POST",
@@ -52,22 +56,22 @@ function ListHeader(props) {
         console.log(err);
       });
   };
- 
-    const onImageChange = (e) => {
-      setImage(e.target.files[0]);
-    };
-    const selectrole = (id) => {
-      console.log(id);
-      setSelectedSystemRoles(id);
-    };
-    const selectstatus = (id) => {
-      console.log(id);
-      setSelectedstatus(id);
-    };
-    const selectcycle = (id) => {
-      console.log(id);
-      setSelectedcycle(id);
-    };
+
+  const onImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+  const selectrole = (id) => {
+    console.log(id);
+    setSelectedSystemRoles(id);
+  };
+  const selectstatus = (id) => {
+    console.log(id);
+    setSelectedstatus(id);
+  };
+  const selectcycle = (id) => {
+    console.log(id);
+    setSelectedcycle(id);
+  };
 
   return (
     <>
@@ -151,6 +155,29 @@ function ListHeader(props) {
                 placeholder="your.example@email.com"
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
+                autoFocus
+                className="header_form"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+              <Form.Label>Level</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Student Level"
+                value={levels}
+                onChange={(e) => setLevels(e.target.value)}
+                autoFocus
+                className="header_form"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+              <Form.Label>Biography</Form.Label>
+              <Form.Control
+               as="textarea"
+               rows={3}
+                value={biography}
+                onChange={(e) => setBio(e.target.value)}
                 autoFocus
                 className="header_form"
               />

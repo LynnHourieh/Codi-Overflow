@@ -20,10 +20,12 @@ return new class extends Migration
             $table->string("password")->nullable();
             $table->string("email")->nullable();
             $table->string("picture")->nullable();
-            
+            $table->string("biography")->nullable();
+            $table->string("levels")->nullable();
             $table->foreignId('systemroles_id')->constrained('systemroles');
             $table->foreignId('status_id')->nullable()->constrained('statuses');
             $table->foreignId('cycle_id')->constrained('cycles');
+
             $table->timestamps();
         });
     }

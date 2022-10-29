@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class SystemUser extends Model
 {
     use HasFactory;
-    protected $fillable = ["name", "username", "password","email","systemroles_id","status_id","cycle_id"];
+    protected $fillable = ["name", "username", "password","email","systemroles_id","status_id","cycle_id","biography","levels"];
     public function announcment()
     {
         return $this->hasMany(Announcment::class);
@@ -37,4 +37,5 @@ class SystemUser extends Model
     {
         return $this->hasMany(Answer::class);
     }
+  
 }

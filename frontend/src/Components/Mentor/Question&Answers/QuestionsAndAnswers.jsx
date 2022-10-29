@@ -21,9 +21,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function QuestionsAndAnswers(props) {
   const navigate = useNavigate();
-  const Profile = (id) => {
-    // console.log(id)
-    navigate("/controlprofile", { state: { id: id } });
+  const Profile = (a) => {
+   
+    navigate("/controlprofile", { state: { a: a } });
   };
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
@@ -242,14 +242,15 @@ export default function QuestionsAndAnswers(props) {
          setData(data);
        });
    };
+  console.log(props.answer)
   //End of Editing Answer
   return (
     <>
-      <List sx={{ width: "400", maxWidth: 500, bgcolor: "background.paper" }}>
+      <List sx={{ width: "400", maxWidth: 950, bgcolor: "background.paper" }}>
         {props.value.map((unit, index) => {
           return (
             <ListItem alignItems="flex-start" className="items" key={index}>
-              <ListItemAvatar onClick={() => Profile(unit.id)}>
+              <ListItemAvatar onClick={() => Profile(unit.system_user.id)}>
                 <Avatar
                   className="avatar"
                   alt="Remy Sharp"
@@ -260,7 +261,7 @@ export default function QuestionsAndAnswers(props) {
               <ListItemText
                 primary={
                   <React.Fragment>
-                    {unit.system_user.name} {unit.system_user.sysrole.sys_name}
+                    {unit.system_user.name} ({unit.system_user.sysrole.sys_name})
                   </React.Fragment>
                 }
                 secondary={
@@ -354,7 +355,7 @@ export default function QuestionsAndAnswers(props) {
                             return unit.id == item.question_id ? (
                               <ListItem alignItems="flex-start">
                                 <ListItemAvatar
-                                  onClick={() => Profile(item.id)}
+                                  onClick={() => Profile(item.system_user.id)}
                                 >
                                   <Avatar
                                     className="avatar_answer"
@@ -363,7 +364,9 @@ export default function QuestionsAndAnswers(props) {
                                   />
                                 </ListItemAvatar>
                                 <ListItemText
-                                  primary={item.system_user.name}
+                                  primary={ <React.Fragment> {item.system_user.name} ({item.system_user.sysrole.sys_name})</React.Fragment>}
+                                 
+                     
                                   secondary={
                                     <React.Fragment>
                                       <Typography
@@ -379,7 +382,7 @@ export default function QuestionsAndAnswers(props) {
                                               as={CustomToggle}
                                             ></Dropdown.Toggle>
                                             <Dropdown.Menu size="sm" title="">
-                                              <Dropdown.Header
+                                              {item.system_user.id ==ID ? (<><Dropdown.Header
                                                 style={{ cursor: "pointer" }}
                                                 onClick={() => {
                                                   EditanswerhandleShow();
@@ -392,8 +395,9 @@ export default function QuestionsAndAnswers(props) {
                                                 }}
                                               >
                                                 Edit
-                                              </Dropdown.Header>
-                                              <Dropdown.Divider />
+                                              </Dropdown.Header><Dropdown.Divider /></>):("")}
+                                              
+                                              
                                               <Dropdown.Header
                                                 style={{ cursor: "pointer" }}
                                                 onClick={() =>{

@@ -19,11 +19,11 @@ function QuestionCategoryHeaderStudent(props) {
 
   return (
     <>
-      <Nav className="justify-content-center" activeKey="/home">
+      <Nav className="justify-content-center category" activeKey="/home">
         <Nav.Item>
           <Nav.Link
             href=""
-            style={{ color: "#f54b9d" }}
+            style={{ color: "#f54b9d", padding: 20 }}
             onClick={() => allfilter()}
           >
             ALL
@@ -34,7 +34,7 @@ function QuestionCategoryHeaderStudent(props) {
             <Nav.Item key={unit.id}>
               <Nav.Link
                 href=""
-                style={{ color: "#f54b9d" }}
+                style={{ color: "#f54b9d", padding: 20 }}
                 onClick={() => filterCategory(unit.id)}
               >
                 {unit.cat_name}
@@ -43,7 +43,7 @@ function QuestionCategoryHeaderStudent(props) {
           );
         })}
       </Nav>
- 
+
       <QuestionsAndAnswersStudent
         question={props.question}
         setQuestion={props.setQuestion}

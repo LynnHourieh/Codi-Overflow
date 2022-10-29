@@ -23,7 +23,7 @@ const [data, setData] = useState(null);
 
   const FetchProfile = () => {
     fetch(
-      `${process.env.REACT_APP_Codi_URL}/api/sysuser/${location.state.id}`,
+      `${process.env.REACT_APP_Codi_URL}/api/sysuser/${location.state.a}`,
       {
         method: "GET",
         headers: {
@@ -70,9 +70,11 @@ const [data, setData] = useState(null);
       item.status_id,
       item.cycle_id,
       item.systemroles_id,
+      item.biography
+
     ];
   });
-    
+
 
   return (
     <>
@@ -136,15 +138,12 @@ const [data, setData] = useState(null);
               </div>
             </div>
             <div className="col-md-2">
-              {profile[0].id == ID || profile[0].sysrole.sys_name =="Student"? (
+              {profile[0].id == ID ||
+              profile[0].sysrole.sys_name == "Student" ? (
                 <EditProfile
-         
                   profile={profile}
-               
                   cycle={props.cycle}
-                 
                   status={props.status}
-                
                   sysroles={props.sysroles}
                 />
               ) : (
@@ -153,7 +152,17 @@ const [data, setData] = useState(null);
             </div>
           </div>
           <div className="row">
-            <div className="col-md-4"> </div>
+            <div className="col-md-4">
+              {profiledetails[0][11] == "null" || profiledetails[0][11]== null ? (
+                " "
+              ) : (
+                <>
+                  <label className="bio">Biography:</label>
+                  <br></br>
+                  <div className="bio_info">"{profile[0].biography}"</div>
+                </>
+              )}{" "}
+            </div>
             <div className="col-md-8">
               <div className="tab-content profile-tab" id="myTabContent">
                 <div
@@ -203,6 +212,18 @@ const [data, setData] = useState(null);
                       <p>{profiledetails[0][5]}</p>
                     </div>
                   </div>
+                  {profile[0].levels == null || profile[0].levels=="null" ? (
+                    ""
+                  ) : (
+                    <div className="row">
+                      <div className="col-md-6">
+                        <label>Level</label>
+                      </div>
+                      <div className="col-md-6">
+                        <p>{profile[0].levels}</p>
+                      </div>{" "}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

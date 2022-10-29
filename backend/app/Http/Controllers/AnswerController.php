@@ -15,7 +15,7 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        $answer = Answer::with('system_user',"question")->orderBy('id', 'desc')->get();
+        $answer = Answer::with('system_user.sysrole',"question")->orderBy('id', 'desc')->get();
         return response()->json($answer);
     }
    

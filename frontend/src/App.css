@@ -19,7 +19,7 @@
   margin: 10px;
 
   box-shadow: #2e489e 0px 3px 8px;
-  margin-left: 80%;
+  margin-left:30%;
 }
 .latest_items {
   margin: 10px;
@@ -31,9 +31,10 @@
   filter: blur(2px);
 }
 
-@media screen and (max-width: 880px) {
+
+@media screen and (max-width: 890px) {
   .items {
-    margin: 10px;
+    margin: 30px;
 
     box-shadow: #2e489e 0px 3px 8px;
   }
@@ -205,4 +206,11 @@ th {
 }
 .navbar_color:hover {
   color: #2e489e;
+}
+ .bio{color: #f54b9d;
+  font-weight: 600;
+}
+.bio_info{
+  color: #2e489e;
+
 }

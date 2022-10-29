@@ -17,6 +17,8 @@ function EditProfile(props) {
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
   const [picture, setPicture] = useState(null);
+  const[biography,setBio]=useState("");
+  const[levels,setLevel]=useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -26,6 +28,8 @@ function EditProfile(props) {
     formData.append("username", username);
     formData.append("email", email);
     formData.append("password", password);
+    formData.append("biography", biography);
+    formData.append("levels",levels);
     if (typeof picture === "array" || typeof picture === "object") {
       formData.append("picture", picture);
     }
@@ -66,7 +70,7 @@ function EditProfile(props) {
     setSelectedcycle(id);
   };
   const ID = localStorage.getItem("id");
-    const ROLE = localStorage.getItem("role");
+  const ROLE = localStorage.getItem("role");
   let profiledetails = props.profile.map(function (item) {
     return [
       item.picture,
@@ -83,9 +87,11 @@ function EditProfile(props) {
       item.systemroles_id,
       item.password,
       item.systemroles_id,
+      item.biography,
+      item.levels
     ];
   });
-  console.log(profiledetails[0][12]);
+ 
 
   return (
     <>
@@ -102,6 +108,8 @@ function EditProfile(props) {
           setSelectedstatus(profiledetails[0][9]);
           setPicture(profiledetails[0][0]);
           setSelectedSystemRoles(profiledetails[0][10]);
+          setBio(profiledetails[0][13]);
+          setLevel(profiledetails[0][14]);
         }}
         className="form"
       >
@@ -132,7 +140,22 @@ function EditProfile(props) {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            {" "}
+            {ROLE==2 ? ( <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlInput2"
+                >
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="your full name"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    className="header_form"
+                    autoFocus
+                  />
+                </Form.Group>):("")}
             {profiledetails[0][7] == ID ? (
               <>
                 {" "}
@@ -185,28 +208,46 @@ function EditProfile(props) {
                     className="header_form"
                   />
                 </Form.Group>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlInput12"
+                >
+                  <Form.Label>Biography</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    required
+                    className="header_form"
+                    value={biography}
+                    onChange={(e) => {
+                      setBio(e.target.value);
+                      console.log(biography);
+                    }}
+                  />
+                </Form.Group>
               </>
             ) : (
               ""
-            )}{" "}
+            )}
             {ROLE == 2 ? (
               <>
-                <Form.Group
+               
+                {profiledetails[0][1]=="Student" ?(<Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlInput2"
                 >
-                  <Form.Label>Name</Form.Label>
+                 <Form.Label>Levels</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="your full name"
-                    value={name}
+                    placeholder="Student's Level"
+                    value={levels}
                     onChange={(e) => {
-                      setName(e.target.value);
+                      setLevel(e.target.value);
                     }}
                     className="header_form"
                     autoFocus
                   />
-                </Form.Group>
+                </Form.Group>):("")} 
                 <Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlInput5"
@@ -259,14 +300,20 @@ function EditProfile(props) {
             ) : (
               ""
             )}
-            <Form.Label>Upload image</Form.Label>
-            <Form.Control
-              className="header_form"
-              type="file"
-              placeholder="status"
-              onChange={onChangeFile}
-              autoFocus
-            />
+            {profiledetails[0][7] == ID ? (
+              <>
+                <Form.Label>Upload image</Form.Label>
+                <Form.Control
+                  className="header_form"
+                  type="file"
+                  placeholder="status"
+                  onChange={onChangeFile}
+                  autoFocus
+                />
+              </>
+            ) : (
+              " "
+            )}
           </Form>
         </Modal.Body>
         <Modal.Footer className="header_form">
