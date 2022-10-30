@@ -15,6 +15,8 @@ import Form from "react-bootstrap/Form";
 import ListGroup from "react-bootstrap/ListGroup";
 import TooltipPositioned from "./TooltipPositioned";
 import Modal from "react-bootstrap/Modal";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +24,6 @@ import { useNavigate } from "react-router-dom";
 export default function QuestionsAndAnswers(props) {
   const navigate = useNavigate();
   const Profile = (a) => {
-   
     navigate("/controlprofile", { state: { a: a } });
   };
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -59,21 +60,26 @@ export default function QuestionsAndAnswers(props) {
   const EditanswerhandleShow = () => setEditanswerShow(true);
   const [a_image, seta_image] = useState("");
   //Delete answer
-    const [deleteanswershow, setDeleteanswerShow] = useState(false);
-    const DeleteanswerhandleClose = () => setDeleteanswerShow(false);
-    const DeleteanswerhandleShow = () => setDeleteanswerShow(true);
+  const [deleteanswershow, setDeleteanswerShow] = useState(false);
+  const DeleteanswerhandleClose = () => setDeleteanswerShow(false);
+  const DeleteanswerhandleShow = () => setDeleteanswerShow(true);
 
   const [SelectedCategory, setSelectedCategory] = useState(null);
   const [q_text, setq_text] = useState("");
   const [q_image, setq_image] = useState("");
   const [id, setID] = useState(null);
   const ID = localStorage.getItem("id");
+  const NAME=localStorage.getItem("name");
   const ROLE = localStorage.getItem("role");
   const [loading, setLoading] = useState(false);
   const [check, setCheck] = useState("");
   const [a_text, seta_text] = useState(null);
   const [image, setImage] = useState(null);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const [like, setLike] = useState(0);
+  const [dislike, setDislike] = useState(0);
+const [arr,setArray]=useState(['Said']);
+
   var now = new Date();
   var date = now.toLocaleDateString();
   const a_date = date;
@@ -170,6 +176,8 @@ export default function QuestionsAndAnswers(props) {
     formData.append("a_date", a_date);
     formData.append("user_id", ID);
     formData.append("question_id", id);
+    formData.append("like", 0);
+    formData.append("dislike", 0);
     axios
       .post(`${process.env.REACT_APP_Codi_URL}/api/addanswer`, formData, {
         method: "POST",
@@ -217,32 +225,71 @@ export default function QuestionsAndAnswers(props) {
         console.log(error);
       });
   };
+  const EditAnswerTest = async (
+    id,
+    a_text,
+    like,
+    dislike,
+    selectedQuestion
+  ) => {
+    const formData = new FormData();
+    formData.append("a_text", a_text);
+
+    formData.append("like", like);
+    formData.append("dislike", dislike);
+    formData.append("question_id", selectedQuestion);
+
+    if (typeof a_image === "array" || typeof a_image === "object") {
+      formData.append("a_image", a_image);
+    }
+
+    formData.append("_method", "PUT");
+    await axios
+      .post(
+        `${process.env.REACT_APP_Codi_URL}/api/editanswer/${id}`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      )
+      .then((res) => {
+        window.location.reload();
+        setLoading(false);
+      })
+
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const selectquestion = (id) => {
     setSelectedQuestion(id);
   };
-   const DeleteAnswer = async () => {
-     await fetch(`${process.env.REACT_APP_Codi_URL}/api/deleteanswer/${id}`, {
-       method: "DELETE",
+  const DeleteAnswer = async () => {
+    await fetch(`${process.env.REACT_APP_Codi_URL}/api/deleteanswer/${id}`, {
+      method: "DELETE",
 
-       headers: {
-         "Content-Type": "application/json",
-       },
-     })
-       .then((response) => {
-         window.location.reload();
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        window.location.reload();
 
-         if (response.ok) {
-           return response.json();
-         }
+        if (response.ok) {
+          return response.json();
+        }
 
-         throw response;
-       })
+        throw response;
+      })
 
-       .then((data) => {
-         setData(data);
-       });
-   };
-  console.log(props.answer)
+      .then((data) => {
+        setData(data);
+      });
+  };
+  const details=(name)=>{
+   setArray(current =>[...current , name])
+  }
+  console.log(arr)
   //End of Editing Answer
   return (
     <>
@@ -261,7 +308,8 @@ export default function QuestionsAndAnswers(props) {
               <ListItemText
                 primary={
                   <React.Fragment>
-                    {unit.system_user.name} ({unit.system_user.sysrole.sys_name})
+                    {unit.system_user.name} ({unit.system_user.sysrole.sys_name}
+                    )
                   </React.Fragment>
                 }
                 secondary={
@@ -364,9 +412,13 @@ export default function QuestionsAndAnswers(props) {
                                   />
                                 </ListItemAvatar>
                                 <ListItemText
-                                  primary={ <React.Fragment> {item.system_user.name} ({item.system_user.sysrole.sys_name})</React.Fragment>}
-                                 
-                     
+                                  primary={
+                                    <React.Fragment>
+                                      {" "}
+                                      {item.system_user.name} (
+                                      {item.system_user.sysrole.sys_name})
+                                    </React.Fragment>
+                                  }
                                   secondary={
                                     <React.Fragment>
                                       <Typography
@@ -376,34 +428,43 @@ export default function QuestionsAndAnswers(props) {
                                         component={"div"}
                                       >
                                         {item.a_date}
-                                        {item.user_id == ID || item.system_user.systemroles_id==1 ? (
+                                        {item.user_id == ID ||
+                                        item.system_user.systemroles_id == 1 ? (
                                           <Dropdown className="dropdown_list">
                                             <Dropdown.Toggle
                                               as={CustomToggle}
                                             ></Dropdown.Toggle>
                                             <Dropdown.Menu size="sm" title="">
-                                              {item.system_user.id ==ID ? (<><Dropdown.Header
-                                                style={{ cursor: "pointer" }}
-                                                onClick={() => {
-                                                  EditanswerhandleShow();
-                                                  setID(item.id);
-                                                  seta_text(item.a_text);
-                                                  seta_image(item.a_image);
-                                                  setSelectedQuestion(
-                                                    item.question_id
-                                                  );
-                                                }}
-                                              >
-                                                Edit
-                                              </Dropdown.Header><Dropdown.Divider /></>):("")}
-                                              
-                                              
+                                              {item.system_user.id == ID ? (
+                                                <>
+                                                  <Dropdown.Header
+                                                    style={{
+                                                      cursor: "pointer",
+                                                    }}
+                                                    onClick={() => {
+                                                      EditanswerhandleShow();
+                                                      setID(item.id);
+                                                      seta_text(item.a_text);
+                                                      seta_image(item.a_image);
+                                                      setSelectedQuestion(
+                                                        item.question_id
+                                                      );
+                                                    }}
+                                                  >
+                                                    Edit
+                                                  </Dropdown.Header>
+                                                  <Dropdown.Divider />
+                                                </>
+                                              ) : (
+                                                ""
+                                              )}
+
                                               <Dropdown.Header
                                                 style={{ cursor: "pointer" }}
-                                                onClick={() =>{
+                                                onClick={() => {
                                                   DeleteanswerhandleShow();
-                                                setID(item.id)}
-                                                }
+                                                  setID(item.id);
+                                                }}
                                               >
                                                 Delete
                                               </Dropdown.Header>
@@ -425,6 +486,53 @@ export default function QuestionsAndAnswers(props) {
                                           />
                                         )}
                                       </Typography>
+                                      <br></br>
+                                      <div className="likes">
+                                        <div>
+                                          <ThumbUpIcon
+                                            className="Thumps"
+                                            sx={{ fontSize: "20px" }}
+                                            onClick={(e) => {
+                                              EditAnswerTest(
+                                                item.id,
+                                                item.a_text,
+                                                item.like + 1,
+                                                item.dislike,
+                                                item.question_id
+                                              );
+                                              details(
+                                                NAME
+                                              );
+                                            }}
+                                          />
+
+                                          {item.like}
+                                        </div>
+                                        <div>
+                                          <ThumbDownIcon
+                                            className="ThumpsD"
+                                            sx={{ fontSize: "20px" }}
+                                            onClick={(e) => {
+                                              item.like == 0
+                                                ? EditAnswerTest(
+                                                    item.id,
+                                                    item.a_text,
+                                                    item.like,
+                                                    item.dislike + 1,
+                                                    item.question_id
+                                                  )
+                                                : EditAnswerTest(
+                                                    item.id,
+                                                    item.a_text,
+                                                    item.like - 1,
+                                                    item.dislike + 1,
+                                                    item.question_id
+                                                  );
+                                            }}
+                                          />{" "}
+                                          {item.dislike}
+                                        </div>
+                                      </div>
                                     </React.Fragment>
                                   }
                                 />

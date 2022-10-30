@@ -312,7 +312,7 @@ function Pages() {
     loadingcount
   )
     return "loading";
-    console.log(count)
+
   return (
     <Router>
       <Routes>

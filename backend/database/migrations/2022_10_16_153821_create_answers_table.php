@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string("a_date");
             $table->string("a_text");
             $table->string("a_image")->nullable();
+            $table->integer("like")->nullable();
+            $table->integer("dislike")->nullable();
             $table->foreignId('question_id')->constrained('questions');
             $table->foreignId('user_id')->constrained('system_users');
           

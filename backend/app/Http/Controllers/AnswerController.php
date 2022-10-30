@@ -51,6 +51,8 @@ class AnswerController extends Controller
         $answer->a_date = $request->a_date;
         $answer->question_id= $request->question_id;
         $answer->user_id = $request->user_id;
+        $answer->like=$request->like;
+         $answer->dislike=$request->dislike;
 
         $answer->save();
         return $answer;
@@ -64,7 +66,7 @@ class AnswerController extends Controller
      */
     public function show(Answer $answer)
     {
-        //
+        
     }
 
     /**
@@ -73,10 +75,7 @@ class AnswerController extends Controller
      * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Answer $answer)
-    {
-        //
-    }
+   
 
     /**
      * Update the specified resource in storage.

@@ -369,7 +369,7 @@ export default function LatestQuuestion(props) {
                          
                           {props.answer.map((item, idx) => {
                             return unit.id == item.question_id ? (
-                              <ListItem alignItems="flex-start">
+                              <ListItem alignItems="flex-start" key={idx}>
                                 <ListItemAvatar
                                   onClick={() => Profile(item.id)}
                                 >

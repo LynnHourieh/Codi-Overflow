@@ -214,3 +214,28 @@ th {
   color: #2e489e;
 
 }
+
+/*---------------------------answers--------------------*/
+
+.Thumps{
+padding-right: 2px;
+ color: #2e489e;
+ cursor: pointer;
+ 
+ 
+
+}
+.ThumpsD{
+padding: 2px;
+ color: #fbb107;
+ cursor: pointer;
+
+ 
+
+}
+.likes{
+  display: flex;
+  justify-content: space-between;
+}
+
+/*---------------------------answers--------------------*/
