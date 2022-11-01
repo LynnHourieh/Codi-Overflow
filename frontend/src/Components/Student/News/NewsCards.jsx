@@ -8,6 +8,8 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Loading from "../../Layout/Loading";
+
 
 function NewsCards() {
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -121,7 +123,7 @@ function NewsCards() {
   useEffect(() => {
     FetchNews();
   }, []);
-  if (loading) return "loading";
+  if (loading) return <Loading/>;
   return (
     <div className="news_cards">
       {news.map((item) => {
@@ -287,6 +289,7 @@ function NewsCards() {
           </Button>
         </Modal.Footer>
       </Modal>
+     
     </div>
   );
 }

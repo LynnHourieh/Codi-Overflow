@@ -16,6 +16,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import Footer from "../../Layout/Footer"
 
 export default function QuestionsAndAnswersStudent(props) {
   const navigate = useNavigate();
@@ -197,7 +198,6 @@ export default function QuestionsAndAnswersStudent(props) {
     const formData = new FormData();
     formData.append("a_text", a_text);
 
-   
     formData.append("question_id", selectedQuestion);
 
     if (typeof a_image === "array" || typeof a_image === "object") {
@@ -222,36 +222,42 @@ export default function QuestionsAndAnswersStudent(props) {
         console.log(error);
       });
   };
-   const EditAnswerTest = async (id, a_text, like, dislike, selectedQuestion) => {
-     const formData = new FormData();
-     formData.append("a_text", a_text);
+  const EditAnswerTest = async (
+    id,
+    a_text,
+    like,
+    dislike,
+    selectedQuestion
+  ) => {
+    const formData = new FormData();
+    formData.append("a_text", a_text);
 
-     formData.append("like", like);
-     formData.append("dislike", dislike);
-     formData.append("question_id", selectedQuestion);
+    formData.append("like", like);
+    formData.append("dislike", dislike);
+    formData.append("question_id", selectedQuestion);
 
-     if (typeof a_image === "array" || typeof a_image === "object") {
-       formData.append("a_image", a_image);
-     }
+    if (typeof a_image === "array" || typeof a_image === "object") {
+      formData.append("a_image", a_image);
+    }
 
-     formData.append("_method", "PUT");
-     await axios
-       .post(
-         `${process.env.REACT_APP_Codi_URL}/api/editanswer/${id}`,
-         formData,
-         {
-           headers: { "Content-Type": "multipart/form-data" },
-         }
-       )
-       .then((res) => {
-         window.location.reload();
-         setLoading(false);
-       })
+    formData.append("_method", "PUT");
+    await axios
+      .post(
+        `${process.env.REACT_APP_Codi_URL}/api/editanswer/${id}`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      )
+      .then((res) => {
+        window.location.reload();
+        setLoading(false);
+      })
 
-       .catch((error) => {
-         console.log(error);
-       });
-   };
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const selectquestion = (id) => {
     setSelectedQuestion(id);
   };
@@ -792,6 +798,7 @@ export default function QuestionsAndAnswersStudent(props) {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Footer/>
     </>
   );
 }

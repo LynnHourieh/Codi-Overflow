@@ -1,4 +1,4 @@
-.test {
+ .test {
   display: flex;
   justify-content: space-between;
 }
@@ -61,7 +61,14 @@
 .dropdown_list {
   float: right;
 }
+
+
+
+
 /* ----------------News----------- */
+
+
+
 .news_cards {
   display: flex;
   flex-wrap: wrap;
@@ -141,12 +148,11 @@ h1 {
 .news_date {
   float: right;
   font-size: 12px;
-}
+}  */
 /* ----------------News----------- */
 /* ----------------Pagination----------- */
 
 /* ----------------Pagination----------- */
-
 .more_options {
   float: right;
   cursor: pointer;
@@ -154,10 +160,10 @@ h1 {
 th {
   font-weight: 500;
   color: #2e489e;
-}
+} 
 
 /*------------------Student List-------------*/
-.list_images {
+ .list_images {
   width: 40px;
   border-radius: 50%;
   height: 40px;
@@ -181,7 +187,7 @@ th {
 .avatar_answer {
   border: 2px solid #fbb107;
   cursor: pointer;
-}
+} 
 /*------------------Student List-------------*/
 
 /*--------------------form----------------------*/
@@ -198,10 +204,10 @@ th {
 }
 .note {
   color: #2e489e;
-}
+} 
 /*--------------------form----------------------*/
 
-.navbar_color {
+ .navbar_color {
   color: #f54b9d;
 }
 .navbar_color:hover {
@@ -213,11 +219,11 @@ th {
 .bio_info{
   color: #2e489e;
 
-}
+} 
 
 /*---------------------------answers--------------------*/
 
-.Thumps{
+ .Thumps{
 padding-right: 2px;
  color: #2e489e;
  cursor: pointer;
@@ -236,6 +242,6 @@ padding: 2px;
 .likes{
   display: flex;
   justify-content: space-between;
-}
+} 
 
 /*---------------------------answers--------------------*/

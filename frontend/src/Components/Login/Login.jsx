@@ -35,7 +35,7 @@ function Login() {
           localStorage.setItem("name", data.status[0].name);
            localStorage.setItem("role", data.status[0].systemroles_id);
           localStorage.setItem("id", data.status[0].id);
-          if((data.status[0].systemroles_id)==1 ?( navigate("/home")):(navigate("/list")))
+          if((data.status[0].systemroles_id)==1 ?( navigate("/home")):(navigate("/controlhome")))
          ;
         }
       });

@@ -76,11 +76,11 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        News::create([
-            "ne_title" => "Job Opportunity",
-            "ne_description" => "Frontend web developer needed in Tripoli",
-            "ne_date" => "3/3/2021",
-        ]);
+        // News::create([
+        //     "ne_title" => "Job Opportunity",
+        //     "ne_description" => "Frontend web developer needed in Tripoli",
+        //     "ne_date" => "3/3/2021",
+        // ]);
         Category::create([
             "cat_name" => "Frontend"
         ]);
@@ -154,6 +154,8 @@ class DatabaseSeeder extends Seeder
             "a_text" => "my answer is here",
             "question_id" => 1,
             "user_id" => 1,
+            "like"=>0,
+            "dislike"=>0
         ]);
       
     }

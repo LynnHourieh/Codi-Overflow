@@ -3,6 +3,7 @@ import NewsCards from './NewsCards';
 import PageItem from "react-bootstrap/PageItem";
 import StickyNav from '../../Layout/StickyNav';
 
+
 function News() {
   return (
     <div>
@@ -29,6 +30,7 @@ function News() {
         </h1>
       </div>
       <NewsCards />
+    
     </div>
   );
 }

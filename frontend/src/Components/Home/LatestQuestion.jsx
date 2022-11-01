@@ -18,9 +18,9 @@ import { useNavigate } from "react-router-dom";
 export default function LatestQuuestion(props) {
     console.log(props.latestquestion)
   const navigate = useNavigate();
-  const Profile = (id) => {
+  const Profile = (a) => {
     // console.log(id)
-    navigate("/controlprofile", { state: { id: id } });
+    navigate("/othersprofile", { state: { a: a } });
   };
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
@@ -267,7 +267,7 @@ export default function LatestQuuestion(props) {
         {props.latestquestion.map((unit, index) => {
           return (
             <ListItem alignItems="flex-start" className="latest_items" key={index}>
-              <ListItemAvatar onClick={() => Profile(unit.id)}>
+              <ListItemAvatar onClick={() => Profile(unit.system_user.id)}>
                 <Avatar
                   className="avatar"
                   alt="Remy Sharp"
@@ -371,7 +371,7 @@ export default function LatestQuuestion(props) {
                             return unit.id == item.question_id ? (
                               <ListItem alignItems="flex-start" key={idx}>
                                 <ListItemAvatar
-                                  onClick={() => Profile(item.id)}
+                                  onClick={() => Profile(item.system_user.id)}
                                 >
                                   <Avatar
                                     className="avatar_answer"

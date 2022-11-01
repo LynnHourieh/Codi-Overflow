@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 import ControlStickyNav from "../../Layout/ControlStickyNav";
+import Loading from "../../Layout/Loading";
 
 const Profile = (props) => {
   const [profile, setProfile] = useState(null);
@@ -54,7 +55,7 @@ const [data, setData] = useState(null);
     FetchProfile();
  
   }, []);
-  if (loading) return "loading";
+  if (loading) return <Loading/>;
 
   let profiledetails = profile.map(function (item) {
     return [

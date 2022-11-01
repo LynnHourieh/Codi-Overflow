@@ -4,7 +4,7 @@ import News from "./Student/News/News";
 import QuestionsAndAnswersHeader from "./Mentor/Question&Answers/QuestionsAndAnswersHeader";
 import Profile from "./Student/Profile/Profile";
 import Home from "./Home/Home";
-
+import ControlHome from "./Mentor/ControlHome/ControlHome"
 import ControlNews from "./Mentor/ControlNews/ControlNews";
 import ControlProfile from "./Mentor/Profile/ControlProfile";
 import StudentList from "./Mentor/List/StudentList";
@@ -14,6 +14,9 @@ import Login from "./Login/Login";
 import StickyNav from "./Layout/StickyNav";
 import ControlStickyNav from "./Layout/ControlStickyNav";
 import YourProfile from "./Mentor/Profile/YourProfile";
+import OthersProfile from "./Student/Profile/OthersProfile"
+import Loading from "./Layout/Loading";
+
 
 function Pages() {
   const [cycle, setCycle] = useState(null);
@@ -292,12 +295,7 @@ function Pages() {
     Count()
   }, []);
 
-  // console.log(cycle);
-  // console.log(status);
-  // console.log(sysroles)
-  // console.log(branch);
-  // console.log(category)
-  // console.log(answer)
+ 
   if (
     loadingCycle ||
     loadingBranch ||
@@ -311,11 +309,24 @@ function Pages() {
     loadinglatestquestion||
     loadingcount
   )
-    return "loading";
+    return <Loading/>;
 
   return (
     <Router>
       <Routes>
+        <Route path="/controlhome" element={<ControlStickyNav />}>
+          <Route
+            index
+            element={
+              <ControlHome
+                latestquestion={latestquestion}
+                answer={answer}
+                category={category}
+                question={question}
+              />
+            }
+          ></Route>
+        </Route>
         <Route path="/home" element={<StickyNav />}>
           <Route
             index
@@ -355,7 +366,6 @@ function Pages() {
             index
             element={
               <Profile
-               
                 count={count}
                 sysroles={sysroles}
                 cycle={cycle}
@@ -406,6 +416,26 @@ function Pages() {
             index
             element={
               <ControlProfile
+                cycle={cycle}
+                setCycle={setCycle}
+                status={status}
+                setStatus={setStatus}
+                sysroles={sysroles}
+                setSysroles={setSysroles}
+                branch={branch}
+                setBranch={setBranch}
+                category={setCategory}
+                count={count}
+              />
+            }
+          ></Route>
+        </Route>
+
+        <Route path="/othersprofile" element={<StickyNav />}>
+          <Route
+            index
+            element={
+              <OthersProfile
                 cycle={cycle}
                 setCycle={setCycle}
                 status={status}

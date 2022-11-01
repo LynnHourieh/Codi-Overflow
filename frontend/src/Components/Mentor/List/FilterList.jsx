@@ -2,6 +2,7 @@ import Nav from "react-bootstrap/Nav";
 import StudentList from "./StudentList";
 import React, { useState, useEffect } from "react";
 import Search from "../../Search/Search";
+import Loading from "../../Layout/Loading";
 function FilterList() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -48,7 +49,7 @@ function FilterList() {
     setItem(profile);
   }, []);
 
-  if (loading) return "loading";
+  if (loading) return <Loading/>;
 
   return (
     <>

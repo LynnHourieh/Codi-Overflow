@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 function StudentList({ item, allfilter ,setLoading ,setItem}) {
   const navigate = useNavigate();
-  const Profile = (id) => {
+  const Profile = (a) => {
   // console.log(id)
-       navigate("/controlprofile", { state: { id: id } });
+       navigate("/controlprofile", { state: { a: a } });
         
   }
    

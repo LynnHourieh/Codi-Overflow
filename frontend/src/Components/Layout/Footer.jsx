@@ -1,30 +1,34 @@
-import React from 'react'
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-function Footer() {
+import TwitterIcon from "@mui/icons-material/Twitter";
+
+function TextLinkExample() {
   return (
     <Navbar bg="light">
       <Container>
-        <Navbar.Brand href="#home">
-          <InstagramIcon />
+        <Navbar.Brand href="https://www.facebook.com/coditechlb/">
+          <FacebookIcon sx={{ color: "#2e489e" }} />
         </Navbar.Brand>
-        <Navbar.Brand href="#home">
-          <FacebookIcon />
+
+        <Navbar.Brand href=" https://www.instagram.com/codi_tech/">
+          <InstagramIcon sx={{ color: "#fbb107" }} />
         </Navbar.Brand>
-        <Navbar.Brand href="#home">
-          <YouTubeIcon />
+        <Navbar.Brand href="https://www.linkedin.com/school/codi.tech/">
+          <LinkedInIcon sx={{ color: "#2e489e" }} />
         </Navbar.Brand>
-        <Navbar.Brand href="#home">
-          
-          <LinkedInIcon />
+        <Navbar.Brand href="https://twitter.com/codi_tech">
+          <TwitterIcon sx={{ color: "#2e489e" }} />
         </Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Navbar.Text>Signed in by: LynnHourieh</Navbar.Text>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
 
-export default Footer
+export default TextLinkExample;

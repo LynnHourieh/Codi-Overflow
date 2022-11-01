@@ -2,6 +2,8 @@ import React,{useState,useEffect} from "react";
 import StickyNav from "../../Layout/StickyNav";
 import { useNavigate, useLocation } from "react-router-dom";
 import EditProfile from "../../Mentor/Profile/EditProfile";
+import Footer from "../../Layout/Footer"
+import Loading from "../../Layout/Loading";
 
 const Profile=(props)=>{
    const [profile, setProfile] = useState(null);
@@ -47,7 +49,7 @@ const Profile=(props)=>{
      FetchProfile();
      
    }, []);
-    if (loading) return "loading";
+    if (loading) return <Loading/>;
      
 
     console.log(profile)
@@ -191,6 +193,7 @@ const Profile=(props)=>{
             </div>
           </form>
         </div>
+        <Footer/>
       </>
     );
 }

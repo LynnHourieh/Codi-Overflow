@@ -22,7 +22,7 @@ function ControlStickyNav() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="/" className="navbar_color">
+              <Nav.Link href="/controlhome" className="navbar_color">
                 Home
               </Nav.Link>
               <Nav.Link href="/yourprofile" className="navbar_color">

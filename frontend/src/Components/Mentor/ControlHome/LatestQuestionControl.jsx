@@ -1,29 +1,25 @@
 import React, { useState, useEffect } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
-import pic from "../../Images/pic.jpg";
+
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
-import ListGroup from "react-bootstrap/ListGroup";
-import TooltipPositioned from "./TooltipPositioned";
 import Modal from "react-bootstrap/Modal";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function QuestionsAndAnswers(props) {
+export default function LatestQuestionControl(props) {
+    console.log(props.latestquestion)
   const navigate = useNavigate();
   const Profile = (a) => {
+    // console.log(id)
     navigate("/controlprofile", { state: { a: a } });
   };
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -69,17 +65,12 @@ export default function QuestionsAndAnswers(props) {
   const [q_image, setq_image] = useState("");
   const [id, setID] = useState(null);
   const ID = localStorage.getItem("id");
-  const NAME=localStorage.getItem("name");
   const ROLE = localStorage.getItem("role");
   const [loading, setLoading] = useState(false);
   const [check, setCheck] = useState("");
   const [a_text, seta_text] = useState(null);
   const [image, setImage] = useState(null);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
-  const [like, setLike] = useState(0);
-  const [dislike, setDislike] = useState(0);
-const [arr,setArray]=useState(['Said']);
-
   var now = new Date();
   var date = now.toLocaleDateString();
   const a_date = date;
@@ -176,8 +167,6 @@ const [arr,setArray]=useState(['Said']);
     formData.append("a_date", a_date);
     formData.append("user_id", ID);
     formData.append("question_id", id);
-    formData.append("like", 0);
-    formData.append("dislike", 0);
     axios
       .post(`${process.env.REACT_APP_Codi_URL}/api/addanswer`, formData, {
         method: "POST",
@@ -201,42 +190,6 @@ const [arr,setArray]=useState(['Said']);
   const EditAnswer = async () => {
     const formData = new FormData();
     formData.append("a_text", a_text);
-    formData.append("question_id", selectedQuestion);
-
-    if (typeof a_image === "array" || typeof a_image === "object") {
-      formData.append("a_image", a_image);
-    }
-
-    formData.append("_method", "PUT");
-    await axios
-      .post(
-        `${process.env.REACT_APP_Codi_URL}/api/editanswer/${id}`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      )
-      .then((res) => {
-        window.location.reload();
-        setLoading(false);
-      })
-
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const EditAnswerTest = async (
-    id,
-    a_text,
-    like,
-    dislike,
-    selectedQuestion
-  ) => {
-    const formData = new FormData();
-    formData.append("a_text", a_text);
-
-    formData.append("like", like);
-    formData.append("dislike", dislike);
     formData.append("question_id", selectedQuestion);
 
     if (typeof a_image === "array" || typeof a_image === "object") {
@@ -286,17 +239,34 @@ const [arr,setArray]=useState(['Said']);
         setData(data);
       });
   };
-  const details=(name)=>{
-   setArray(current =>[...current , name])
-  }
-  console.log(arr)
   //End of Editing Answer
   return (
     <>
-      <List sx={{ width: "400", maxWidth: 800, bgcolor: "background.paper" }}>
-        {props.value.map((unit, index) => {
+      <div className="eleven">
+        <h1>
+          <font color="#f54b9d">Q</font>
+          <font color="#fbb107">u</font>
+          <font color="#2e489e">e</font>
+          <font color="#f54b9d">s</font>
+          <font color="#fbb107">t</font>
+          <font color="#2e489e">i</font>
+          <font color="#f54b9d">o</font>
+          <font color="#fbb107">n</font>
+          <font color="#2e489e">s</font>
+          <font color="#f54b9d"> & </font>
+          <font color="#fbb107">A</font>
+          <font color="#2e489e">n</font>
+          <font color="#f54b9d">s</font>
+          <font color="#fbb107">w</font>
+          <font color="#2e489e">e</font>
+          <font color="#f54b9d">r</font>
+          <font color="#fbb107">s</font>
+        </h1>
+      </div>
+      <List sx={{ width: "400", maxWidth: 1000, bgcolor: "background.paper" }}>
+        {props.latestquestion.map((unit, index) => {
           return (
-            <ListItem alignItems="flex-start" className="items" key={index}>
+            <ListItem alignItems="flex-start" className="latest_items" key={index}>
               <ListItemAvatar onClick={() => Profile(unit.system_user.id)}>
                 <Avatar
                   className="avatar"
@@ -308,16 +278,14 @@ const [arr,setArray]=useState(['Said']);
               <ListItemText
                 primary={
                   <React.Fragment>
-                    {unit.system_user.name} ({unit.system_user.sysrole.sys_name}
-                    )
+                    {unit.system_user.name} {unit.system_user.sysrole.sys_name}
                   </React.Fragment>
                 }
                 secondary={
                   <React.Fragment>
                     {unit.q_date}
 
-                    {unit.system_user_id == ID ||
-                    unit.system_user.sysrole.sys_name == "Student" ? (
+                    {unit.system_user_id == ID ? (
                       <Dropdown className="dropdown_list">
                         <Dropdown.Toggle as={CustomToggle}></Dropdown.Toggle>
                         <Dropdown.Menu size="sm">
@@ -367,7 +335,7 @@ const [arr,setArray]=useState(['Said']);
                         {unit.category.cat_name}
                         <br></br>
                       </Typography>
-                      {/* <TooltipPositioned /> */}
+                     
                     </span>
                     {unit.q_text}
                     {unit.q_image == null ? (
@@ -398,10 +366,10 @@ const [arr,setArray]=useState(['Said']);
                           >
                             Submit
                           </Button>
-                          {/* <Divider variant="inset" /> */}
+                         
                           {props.answer.map((item, idx) => {
                             return unit.id == item.question_id ? (
-                              <ListItem alignItems="flex-start">
+                              <ListItem alignItems="flex-start" key={idx}>
                                 <ListItemAvatar
                                   onClick={() => Profile(item.system_user.id)}
                                 >
@@ -412,13 +380,7 @@ const [arr,setArray]=useState(['Said']);
                                   />
                                 </ListItemAvatar>
                                 <ListItemText
-                                  primary={
-                                    <React.Fragment>
-                                      {" "}
-                                      {item.system_user.name} (
-                                      {item.system_user.sysrole.sys_name})
-                                    </React.Fragment>
-                                  }
+                                  primary={item.system_user.name}
                                   secondary={
                                     <React.Fragment>
                                       <Typography
@@ -428,37 +390,27 @@ const [arr,setArray]=useState(['Said']);
                                         component={"div"}
                                       >
                                         {item.a_date}
-                                        {item.user_id == ID ||
-                                        item.system_user.systemroles_id == 1 ? (
+                                        {item.user_id == ID ? (
                                           <Dropdown className="dropdown_list">
                                             <Dropdown.Toggle
                                               as={CustomToggle}
                                             ></Dropdown.Toggle>
                                             <Dropdown.Menu size="sm" title="">
-                                              {item.system_user.id == ID ? (
-                                                <>
-                                                  <Dropdown.Header
-                                                    style={{
-                                                      cursor: "pointer",
-                                                    }}
-                                                    onClick={() => {
-                                                      EditanswerhandleShow();
-                                                      setID(item.id);
-                                                      seta_text(item.a_text);
-                                                      seta_image(item.a_image);
-                                                      setSelectedQuestion(
-                                                        item.question_id
-                                                      );
-                                                    }}
-                                                  >
-                                                    Edit
-                                                  </Dropdown.Header>
-                                                  <Dropdown.Divider />
-                                                </>
-                                              ) : (
-                                                ""
-                                              )}
-
+                                              <Dropdown.Header
+                                                style={{ cursor: "pointer" }}
+                                                onClick={() => {
+                                                  EditanswerhandleShow();
+                                                  setID(item.id);
+                                                  seta_text(item.a_text);
+                                                  seta_image(item.a_image);
+                                                  setSelectedQuestion(
+                                                    item.question_id
+                                                  );
+                                                }}
+                                              >
+                                                Edit
+                                              </Dropdown.Header>
+                                              <Dropdown.Divider />
                                               <Dropdown.Header
                                                 style={{ cursor: "pointer" }}
                                                 onClick={() => {
@@ -486,53 +438,6 @@ const [arr,setArray]=useState(['Said']);
                                           />
                                         )}
                                       </Typography>
-                                      <br></br>
-                                      <div className="likes">
-                                        <div>
-                                          <ThumbUpIcon
-                                            className="Thumps"
-                                            sx={{ fontSize: "20px" }}
-                                            onClick={(e) => {
-                                              EditAnswerTest(
-                                                item.id,
-                                                item.a_text,
-                                                item.like + 1,
-                                                item.dislike,
-                                                item.question_id
-                                              );
-                                              details(
-                                                NAME
-                                              );
-                                            }}
-                                          />
-
-                                          {item.like}
-                                        </div>
-                                        <div>
-                                          <ThumbDownIcon
-                                            className="ThumpsD"
-                                            sx={{ fontSize: "20px" }}
-                                            onClick={(e) => {
-                                              item.like == 0
-                                                ? EditAnswerTest(
-                                                    item.id,
-                                                    item.a_text,
-                                                    item.like,
-                                                    item.dislike + 1,
-                                                    item.question_id
-                                                  )
-                                                : EditAnswerTest(
-                                                    item.id,
-                                                    item.a_text,
-                                                    item.like - 1,
-                                                    item.dislike + 1,
-                                                    item.question_id
-                                                  );
-                                            }}
-                                          />{" "}
-                                          {item.dislike}
-                                        </div>
-                                      </div>
                                     </React.Fragment>
                                   }
                                 />

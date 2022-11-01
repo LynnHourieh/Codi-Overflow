@@ -8,6 +8,8 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Footer from "../Layout/Footer"
+import Loading from "../Layout/Loading";
 
 function LatestNews() {
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -116,7 +118,7 @@ function LatestNews() {
   useEffect(() => {
     FetchNews();
   }, []);
-  if (loading) return "loading";
+  if (loading) return <Loading/>;
   return (
          <>
       <div className="eleven">
@@ -306,7 +308,9 @@ function LatestNews() {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div></>
+
+    </div>
+    <Footer/></>
   );
 }
 
