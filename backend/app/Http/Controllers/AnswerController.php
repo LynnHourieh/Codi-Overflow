@@ -15,11 +15,11 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        $answer = Answer::with('system_user.sysrole',"question")->orderBy('id', 'desc')->get();
+        $answer = Answer::with('system_user.sysrole', "question")->orderBy('id', 'desc')->get();
         return response()->json($answer);
     }
-   
-  
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -49,10 +49,10 @@ class AnswerController extends Controller
 
         $answer->a_text = $request->a_text;
         $answer->a_date = $request->a_date;
-        $answer->question_id= $request->question_id;
+        $answer->question_id = $request->question_id;
         $answer->user_id = $request->user_id;
-        $answer->like=$request->like;
-         $answer->dislike=$request->dislike;
+        $answer->like = $request->like;
+        $answer->dislike = $request->dislike;
 
         $answer->save();
         return $answer;
@@ -66,7 +66,6 @@ class AnswerController extends Controller
      */
     public function show(Answer $answer)
     {
-        
     }
 
     /**
@@ -75,7 +74,7 @@ class AnswerController extends Controller
      * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-   
+
 
     /**
      * Update the specified resource in storage.
